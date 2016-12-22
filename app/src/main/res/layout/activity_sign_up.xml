@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_sign_up"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bjl.tannum.wellnessathome.Controller.SignUpActivity">
+
+
+    <com.mikhaellopez.circularimageview.CircularImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/register_pic"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/no_pic1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        app:civ_border_color="@color/colorWhiteSmoke"
+        app:civ_border_width="0dp"/>
+
+
+    <EditText
+        android:id="@+id/register_id"
+        android:inputType="number"
+        android:maxLength="13"
+        android:textSize="@dimen/normal_font_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_pic"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="Your ID"
+        android:textColorHint="@color/colorHint"/>
+    <EditText
+        android:id="@+id/register_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_id"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="@dimen/normal_font_size"
+        android:hint="Your Name"
+        android:textColorHint="@color/colorHint" />
+    <EditText
+        android:id="@+id/register_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_name"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="@dimen/normal_font_size"
+        android:hint="Your Email"
+        android:textColorHint="@color/colorHint" />
+
+    <EditText
+        android:id="@+id/register_password"
+        android:inputType="numberPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/register_email"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:textSize="@dimen/normal_font_size"
+        android:hint="Your Password"
+        android:textColorHint="@color/colorHint" />
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorInfo"
+        android:textSize="@dimen/normal_font_size"
+        android:text="REGISTER"
+        android:textColor="@color/colorWhiteBackground"/>
+</RelativeLayout>

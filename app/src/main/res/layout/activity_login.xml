@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.bjl.tannum.wellnessathome.Controller.LoginActivity">
+
+
+    <ImageView
+        android:id="@+id/imgLoginLogo"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/login_logo1"/>
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorInfo"
+        android:textSize="24dp"
+        android:text="SIGNUP"
+        android:textColor="@color/colorWhiteBackground"/>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_above="@id/btnSignUp"
+        android:background="@color/colorSuccess"
+        android:textSize="24dp"
+        android:text="LOGIN"
+        android:textColor="@color/colorWhiteBackground"/>
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginTop="16dp"
+        android:layout_above="@id/btnLogin"
+        android:inputType="numberPassword"
+        android:maxLength="6"
+        android:hint="Your password"
+        android:textColorHint="@color/colorHint"/>
+    <Button
+        android:id="@+id/btnForgotPwd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/editTextPassword"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentEnd="true"
+        android:text="forgot?"
+        android:background="@color/colorWhiteBackground"/>
+    <EditText
+        android:id="@+id/editTextUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_above="@id/editTextPassword"
+        android:inputType="textEmailAddress"
+        android:hint="Your user name"
+        android:textColorHint="@color/colorHint"/>
+
+
+</RelativeLayout>
