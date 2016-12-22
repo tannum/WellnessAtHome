@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.bjl.tannum.wellnessathome.Controller.Adapter.NavRecyclerviewAdapter;
 import com.bjl.tannum.wellnessathome.Model.navItemInfo;
@@ -32,6 +33,8 @@ public class NavigationDrawerFragment extends Fragment {
     public static final String KEY_USER_LEARN_DRAWER = "user_learned_drawer";
     private RecyclerView recyclerView;
     private NavRecyclerviewAdapter adapter;
+    private TextView txtLogout;
+
 
 
     private ActionBarDrawerToggle mDrawerToggle;
@@ -48,6 +51,7 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         mUserLearnedDrawer = Boolean.valueOf(readFromPreferences(getActivity(),KEY_USER_LEARN_DRAWER,"false"));
         if(savedInstanceState != null){
             mFromSaveInstanceState = true;
@@ -55,10 +59,17 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+
+
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer,container,false);
+
+        //Initial Component
+        txtLogout = (TextView)layout.findViewById(R.id.txtMenuLogout);
+
+        //Initial RecycleView
         recyclerView = (RecyclerView)layout.findViewById(R.id.drawerList);
         adapter = new NavRecyclerviewAdapter(getActivity(),getData());
         recyclerView.setAdapter(adapter);

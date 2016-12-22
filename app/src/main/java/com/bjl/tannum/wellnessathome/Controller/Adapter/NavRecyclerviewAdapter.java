@@ -2,6 +2,7 @@ package com.bjl.tannum.wellnessathome.Controller.Adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,11 +37,19 @@ public class NavRecyclerviewAdapter extends RecyclerView.Adapter<NavRecyclerview
     }
 
     @Override
-    public void onBindViewHolder(navViewHolder holder, int position) {
+    public void onBindViewHolder(navViewHolder holder, final int position) {
 
         navItemInfo current = data.get(position);
         holder.title.setText(current.getTitle());
         holder.icon.setImageResource(current.getIconId());
+        holder.icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("debug","Item clicked at " + position);
+            }
+        });
+
+
     }
 
     @Override
