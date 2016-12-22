@@ -42,12 +42,20 @@ public class NavRecyclerviewAdapter extends RecyclerView.Adapter<NavRecyclerview
         navItemInfo current = data.get(position);
         holder.title.setText(current.getTitle());
         holder.icon.setImageResource(current.getIconId());
-        holder.icon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("debug","Item clicked at " + position);
-            }
-        });
+
+//        holder.title.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("debug","Item clicked at " + position);
+//            }
+//        });
+//
+//        holder.icon.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Log.d("debug","picture clicked at " + position);
+//            }
+//        });
 
 
     }

@@ -41,13 +41,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/containerDrawer">
     </android.support.v7.widget.RecyclerView>
+    <View
+        android:id="@+id/sapalator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/drawerList"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="48dp"
+        android:background="@android:color/darker_gray"/>
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/drawerList">
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/sapalator">
+
         <ImageView
             android:id="@+id/nav_icon"
             android:layout_width="wrap_content"
@@ -55,15 +64,18 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_centerVertical = "true"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@mipmap/ic_power_settings_new_black_48dp" />
 
-        <TextView
-            android:id="@+id/txtMenuLogout"
+
+        <Button
+            android:id="@+id/btnLogout"
             android:layout_marginLeft="0dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical = "true"
             android:layout_gravity="center_vertical"
-            android:text="LOGOUT" />
+            android:text="LOGOUT"
+            android:stateListAnimator="@null"
+            android:background="@color/colorWhiteBackground"/>
     </LinearLayout>
 </RelativeLayout>

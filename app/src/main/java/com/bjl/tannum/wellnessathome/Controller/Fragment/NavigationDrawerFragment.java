@@ -2,6 +2,7 @@ package com.bjl.tannum.wellnessathome.Controller.Fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,11 +12,15 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.bjl.tannum.wellnessathome.Controller.Activity.LoginActivity;
+import com.bjl.tannum.wellnessathome.Controller.Activity.MainActivity;
 import com.bjl.tannum.wellnessathome.Controller.Adapter.NavRecyclerviewAdapter;
 import com.bjl.tannum.wellnessathome.Model.navItemInfo;
 import com.bjl.tannum.wellnessathome.R;
@@ -26,14 +31,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class NavigationDrawerFragment extends Fragment {
+public class NavigationDrawerFragment extends Fragment implements View.OnClickListener{
 
 
     public static final String PREF_FILE_NAME = "testpref";
     public static final String KEY_USER_LEARN_DRAWER = "user_learned_drawer";
     private RecyclerView recyclerView;
     private NavRecyclerviewAdapter adapter;
-    private TextView txtLogout;
+    private Button btnLogout;
 
 
 
@@ -58,6 +63,8 @@ public class NavigationDrawerFragment extends Fragment {
         }
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -67,7 +74,8 @@ public class NavigationDrawerFragment extends Fragment {
         View layout = inflater.inflate(R.layout.fragment_navigation_drawer,container,false);
 
         //Initial Component
-        txtLogout = (TextView)layout.findViewById(R.id.txtMenuLogout);
+        btnLogout = (Button) layout.findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
 
         //Initial RecycleView
         recyclerView = (RecyclerView)layout.findViewById(R.id.drawerList);
@@ -77,10 +85,24 @@ public class NavigationDrawerFragment extends Fragment {
         return layout;
     }
 
+
+    @Override
+    public void onClick(View v) {
+
+        if(v.getId() == R.id.btnLogout){
+            Log.d("debug","Logout button clicked");
+            mDrawerLayout.closeDrawers();
+            Intent intent = new Intent(getContext(), LoginActivity.class);
+            startActivity(intent);
+            getActivity().finish();
+        }
+    }
+
+
     public static List<navItemInfo> getData(){
         List<navItemInfo> data = new ArrayList<>();
-        int[] icons = {R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,R.mipmap.ic_launcher,};
-        String[] titles ={"Test1", "Test2","Test3","Test4"};
+        int[] icons = {R.mipmap.ic_person_black_48dp,R.mipmap.ic_notifications_black_48dp,R.mipmap.ic_help_black_48dp,R.mipmap.ic_receipt_black_48dp};
+        String[] titles ={"Edit Profile", "Notification Settings","Feedback & Support","Terms & Privacy"};
 
         for(int i = 0;i<titles.length && i<icons.length;i++){
             navItemInfo info = new navItemInfo();
@@ -136,4 +158,6 @@ public class NavigationDrawerFragment extends Fragment {
         SharedPreferences sharedPreferences = context.getSharedPreferences(PREF_FILE_NAME,context.MODE_PRIVATE);
         return sharedPreferences.getString(preferenceName,defaultValue);
     }
+
+
 }

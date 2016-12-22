@@ -4,6 +4,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.webkit.WebView;
 
 import com.bjl.tannum.wellnessathome.Controller.Fragment.NavigationDrawerFragment;
@@ -36,5 +37,10 @@ public class MainActivity extends AppCompatActivity {
         webView.getSettings().setJavaScriptEnabled(true);
         webView.loadUrl("http://www.wellnessathomes.net");
 
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.d("debug","On Resume");
     }
 }
