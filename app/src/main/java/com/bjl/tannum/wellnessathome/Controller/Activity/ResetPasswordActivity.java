@@ -1,4 +1,4 @@
-package com.bjl.tannum.wellnessathome.Controller;
+package com.bjl.tannum.wellnessathome.Controller.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

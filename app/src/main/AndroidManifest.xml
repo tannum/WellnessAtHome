@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".Controller.Activity.MainActivity"
             android:configChanges="orientation|screenSize">
 
             <!-- <intent-filter> -->
@@ -22,7 +22,7 @@
             <!-- </intent-filter> -->
         </activity>
         <activity
-            android:name=".Controller.LoginActivity"
+            android:name=".Controller.Activity.LoginActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,8 +30,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controller.SignUpActivity" />
-        <activity android:name=".Controller.ResetPasswordActivity"></activity>
+        <activity android:name=".Controller.Activity.SignUpActivity" />
+        <activity android:name=".Controller.Activity.ResetPasswordActivity"></activity>
     </application>
 
 </manifest>

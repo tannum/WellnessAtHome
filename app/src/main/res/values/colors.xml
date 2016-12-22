@@ -10,4 +10,5 @@
     <color name="colorWarning">#F57F17</color>
     <color name="colorInfo">#0091EA</color>
     <color name="colorHint">#c1c1c1</color>
+    <color name="colorNavBackground">#DADADA</color>
 </resources>

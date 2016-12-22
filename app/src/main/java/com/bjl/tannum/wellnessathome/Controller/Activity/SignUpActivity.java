@@ -1,4 +1,4 @@
-package com.bjl.tannum.wellnessathome.Controller;
+package com.bjl.tannum.wellnessathome.Controller.Activity;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
