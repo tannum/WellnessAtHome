@@ -42,23 +42,98 @@
         android:layout_below="@+id/containerDrawer">
     </android.support.v7.widget.RecyclerView>
     <View
-        android:id="@+id/sapalator"
+        android:id="@+id/sapalator1"
+        android:layout_below="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/drawerList"
         android:layout_marginTop="30dp"
         android:layout_marginRight="48dp"
         android:background="@android:color/darker_gray"/>
+
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/menu_2"
+        android:layout_below="@+id/sapalator1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/picWeb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_centerVertical = "true"
+            android:src="@mipmap/ic_public_black_48dp" />
+
+        <Button
+            android:id="@+id/btnWebLink1"
+            android:layout_marginLeft="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical = "true"
+            android:layout_gravity="center_vertical"
+            android:text="www.wellnessathomes.net"
+            android:stateListAnimator="@null"
+            android:background="@color/colorWhiteBackground"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/menu_3"
+        android:layout_below="@+id/menu_2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/picWeb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_centerVertical = "true"
+            android:src="@mipmap/ic_public_black_48dp" />
+
+        <Button
+            android:id="@+id/btnWebLink2"
+            android:layout_marginLeft="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical = "true"
+            android:layout_gravity="center_vertical"
+            android:text="www.wellnessatresort.com"
+            android:stateListAnimator="@null"
+            android:background="@color/colorWhiteBackground"/>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/sapalator2"
+        android:layout_below="@+id/menu_3"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="48dp"
+        android:background="@android:color/darker_gray"/>
+
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/menu_4"
+        android:layout_below="@+id/sapalator2"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginTop="10dp"
-        android:layout_below="@+id/sapalator">
+        >
 
         <ImageView
-            android:id="@+id/nav_icon"
+            android:id="@+id/imgMenuPicLogout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private RecyclerView recyclerView;
     private NavRecyclerviewAdapter adapter;
     private Button btnLogout;
+    private Button btnWebLink1;
+    private Button btnWebLink2;
 
 
 
@@ -47,6 +50,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private boolean mUserLearnedDrawer;
     private boolean mFromSaveInstanceState;
     private View containerView;
+
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -75,7 +79,12 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
         //Initial Component
         btnLogout = (Button) layout.findViewById(R.id.btnLogout);
+        btnWebLink1 = (Button)layout.findViewById(R.id.btnWebLink1);
+        btnWebLink2 = (Button)layout.findViewById(R.id.btnWebLink2);
         btnLogout.setOnClickListener(this);
+        btnWebLink1.setOnClickListener(this);
+        btnWebLink2.setOnClickListener(this);
+
 
         //Initial RecycleView
         recyclerView = (RecyclerView)layout.findViewById(R.id.drawerList);
@@ -89,13 +98,41 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     @Override
     public void onClick(View v) {
 
-        if(v.getId() == R.id.btnLogout){
-            Log.d("debug","Logout button clicked");
-            mDrawerLayout.closeDrawers();
-            Intent intent = new Intent(getContext(), LoginActivity.class);
-            startActivity(intent);
-            getActivity().finish();
+        switch (v.getId()){
+            case R.id.btnLogout:
+                Log.d("debug","Logout button clicked");
+                mDrawerLayout.closeDrawers();
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                break;
+            case R.id.btnWebLink1:
+                Log.d("debug","Open Weblink1 clicked");
+                mDrawerLayout.closeDrawers();
+                WebView webView  = (WebView)getActivity().findViewById(R.id.webView);
+                webView.getSettings().setJavaScriptEnabled(true);
+                webView.loadUrl("http://www.wellnessathomes.net");
+
+                break;
+            case R.id.btnWebLink2:
+                Log.d("debug","Open Weblink2 clicked");
+                WebView webView1  = (WebView)getActivity().findViewById(R.id.webView);
+                webView1.getSettings().setJavaScriptEnabled(true);
+                webView1.loadUrl("http://www.wellnessatresort.net");
+                mDrawerLayout.closeDrawers();
+                break;
         }
+
+
+//        if(v.getId() == R.id.btnLogout){
+//            Log.d("debug","Logout button clicked");
+//            mDrawerLayout.closeDrawers();
+//            Intent intent = new Intent(getContext(), LoginActivity.class);
+//            startActivity(intent);
+//            getActivity().finish();
+//        }
+
+
     }
 
 
@@ -160,4 +197,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     }
 
 
+//    public interface OnOpenLinkListener {
+//       public void onOpenLlink(String url);
+//    }
 }
