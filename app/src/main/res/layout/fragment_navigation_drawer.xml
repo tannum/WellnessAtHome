@@ -1,8 +1,11 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorWhiteBackground"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
     tools:context="com.bjl.tannum.wellnessathome.Controller.Fragment.NavigationDrawerFragment">
 
     <RelativeLayout
@@ -34,7 +37,9 @@
             android:textSize="24dp"
             android:text="user@email.com"
             android:textColor="@color/colorWhiteSmoke"/>
+
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/drawerList"
         android:layout_width="match_parent"
@@ -46,85 +51,143 @@
         android:layout_below="@+id/drawerList"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="48dp"
         android:background="@android:color/darker_gray"/>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/menu_2"
+        android:id="@+id/webLinkContrainer1"
         android:layout_below="@+id/sapalator1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/picWeb1"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_centerVertical = "true"
-            android:src="@mipmap/ic_public_black_48dp" />
-
-        <Button
-            android:id="@+id/btnWebLink1"
-            android:layout_marginLeft="0dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical = "true"
-            android:layout_gravity="center_vertical"
-            android:text="www.wellnessathomes.net"
-            android:stateListAnimator="@null"
-            android:background="@color/colorWhiteBackground"/>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/picWeb1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_public_black_24dp" />
+            <Button
+                android:id="@+id/btnWebLink1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="Home"
+                android:textAlignment="textStart"
+                android:stateListAnimator="@null"
+                android:background="@color/colorWhiteBackground"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/menu_3"
-        android:layout_below="@+id/menu_2"
+        android:id="@+id/webLinkContrainer2"
+        android:layout_below="@+id/webLinkContrainer1"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp">
-
-        <ImageView
-            android:id="@+id/picWeb2"
+        android:layout_height="wrap_content">
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_centerVertical = "true"
-            android:src="@mipmap/ic_public_black_48dp" />
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/picWeb2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_public_black_24dp" />
+            <Button
+                android:id="@+id/btnWebLink2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="Resort"
+                android:textAlignment="textStart"
+                android:stateListAnimator="@null"
+                android:background="@color/colorWhiteBackground"/>
+        </RelativeLayout>
 
-        <Button
-            android:id="@+id/btnWebLink2"
-            android:layout_marginLeft="0dp"
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/webLinkContrainer3"
+        android:layout_below="@+id/webLinkContrainer2"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical = "true"
-            android:layout_gravity="center_vertical"
-            android:text="www.wellnessatresort.com"
-            android:stateListAnimator="@null"
-            android:background="@color/colorWhiteBackground"/>
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/picWeb3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_public_black_24dp" />
+            <Button
+                android:id="@+id/btnWebLink3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="Sahakorn"
+                android:textAlignment="textStart"
+                android:stateListAnimator="@null"
+                android:background="@color/colorWhiteBackground"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/webLinkContrainer4"
+        android:layout_below="@+id/webLinkContrainer3"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/picWeb4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"
+                android:src="@mipmap/ic_public_black_24dp" />
+            <Button
+                android:id="@+id/btnWebLink4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:text="City"
+                android:textAlignment="textStart"
+                android:stateListAnimator="@null"
+                android:background="@color/colorWhiteBackground"/>
+        </RelativeLayout>
 
     </LinearLayout>
 
     <View
         android:id="@+id/sapalator2"
-        android:layout_below="@+id/menu_3"
+        android:layout_below="@+id/webLinkContrainer4"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
         android:layout_marginRight="48dp"
         android:background="@android:color/darker_gray"/>
 
 
     <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/menu_4"
+        android:id="@+id/menu_6"
         android:layout_below="@+id/sapalator2"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -137,7 +200,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_centerVertical = "true"
             android:src="@mipmap/ic_power_settings_new_black_48dp" />
 
@@ -148,8 +210,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical = "true"
-            android:layout_gravity="center_vertical"
             android:text="LOGOUT"
+            android:textAlignment="textStart"
             android:stateListAnimator="@null"
             android:background="@color/colorWhiteBackground"/>
     </LinearLayout>

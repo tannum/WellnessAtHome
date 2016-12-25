@@ -42,6 +42,8 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
     private Button btnLogout;
     private Button btnWebLink1;
     private Button btnWebLink2;
+    private Button btnWebLink3;
+    private Button btnWebLink4;
 
 
 
@@ -81,9 +83,13 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
         btnLogout = (Button) layout.findViewById(R.id.btnLogout);
         btnWebLink1 = (Button)layout.findViewById(R.id.btnWebLink1);
         btnWebLink2 = (Button)layout.findViewById(R.id.btnWebLink2);
+        btnWebLink3 = (Button)layout.findViewById(R.id.btnWebLink3);
+        btnWebLink4 = (Button)layout.findViewById(R.id.btnWebLink4);
         btnLogout.setOnClickListener(this);
         btnWebLink1.setOnClickListener(this);
         btnWebLink2.setOnClickListener(this);
+        btnWebLink3.setOnClickListener(this);
+        btnWebLink4.setOnClickListener(this);
 
 
         //Initial RecycleView
@@ -121,6 +127,20 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 webView1.loadUrl("http://www.wellnessatresort.net");
                 mDrawerLayout.closeDrawers();
                 break;
+            case R.id.btnWebLink3:
+                Log.d("debug","Open Weblink3 clicked");
+                WebView webView2  = (WebView)getActivity().findViewById(R.id.webView);
+                webView2.getSettings().setJavaScriptEnabled(true);
+                webView2.loadUrl("http://www.sahakornwellness.com");
+                mDrawerLayout.closeDrawers();
+                break;
+            case R.id.btnWebLink4:
+                Log.d("debug","Open Weblink4 clicked");
+                WebView webView3  = (WebView)getActivity().findViewById(R.id.webView);
+                webView3.getSettings().setJavaScriptEnabled(true);
+                webView3.loadUrl("http://www.wellnesscity.co.th");
+                mDrawerLayout.closeDrawers();
+                break;
         }
 
 
@@ -138,7 +158,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
 
     public static List<navItemInfo> getData(){
         List<navItemInfo> data = new ArrayList<>();
-        int[] icons = {R.mipmap.ic_person_black_48dp,R.mipmap.ic_notifications_black_48dp,R.mipmap.ic_help_black_48dp,R.mipmap.ic_receipt_black_48dp};
+        int[] icons = {R.mipmap.ic_person_black_24dp,R.mipmap.ic_notifications_black_24dp,R.mipmap.ic_live_help_black_24dp,R.mipmap.ic_format_list_bulleted_black_24dp};
         String[] titles ={"Edit Profile", "Notification Settings","Feedback & Support","Terms & Privacy"};
 
         for(int i = 0;i<titles.length && i<icons.length;i++){
