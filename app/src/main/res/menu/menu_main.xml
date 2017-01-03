@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.MainActivity">
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Logout"/>
+    <item
+        android:id="@+id/action_promotion"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Promotion"/>
+    <item
+        android:id="@+id/action_location"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Location"/>
+
+    <item
+        android:id="@+id/action_home"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_home_black_24dp"
+        android:title="Home"/>
+    <item
+        android:id="@+id/action_emergency"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_phone_in_talk_black_24dp"
+        android:title="Home"/>
+    <item
+        android:id="@+id/action_appointment"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:icon="@mipmap/ic_event_note_black_24dp"
+        android:title="Home"/>
+
+</menu>

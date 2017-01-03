@@ -1,0 +1,36 @@
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipeContainerSahakron"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.bjl.tannum.wellnessathome.Controller.Fragment.WellnessSahakornFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="wellness sahakron"/>-->
+
+    <me.zhanghai.android.materialprogressbar.MaterialProgressBar
+        android:id="@+id/progress_bar_sahakron"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:indeterminate="true"
+        app:mpb_progressStyle="horizontal"
+        style="@style/Widget.MaterialProgressBar.ProgressBar.Horizontal" />
+
+    <WebView
+        android:id="@+id/webWellnessSahakorn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></WebView>
+
+</FrameLayout>
+</android.support.v4.widget.SwipeRefreshLayout>
+

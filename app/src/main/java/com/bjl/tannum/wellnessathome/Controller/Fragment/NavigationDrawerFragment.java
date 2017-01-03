@@ -115,30 +115,30 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
             case R.id.btnWebLink1:
                 Log.d("debug","Open Weblink1 clicked");
                 mDrawerLayout.closeDrawers();
-                WebView webView  = (WebView)getActivity().findViewById(R.id.webView);
-                webView.getSettings().setJavaScriptEnabled(true);
-                webView.loadUrl("http://www.wellnessathomes.net");
+//                WebView webView  = (WebView)getActivity().findViewById(R.id.webView);
+//                webView.getSettings().setJavaScriptEnabled(true);
+//                webView.loadUrl("http://www.wellnessathomes.net");
 
                 break;
             case R.id.btnWebLink2:
                 Log.d("debug","Open Weblink2 clicked");
-                WebView webView1  = (WebView)getActivity().findViewById(R.id.webView);
-                webView1.getSettings().setJavaScriptEnabled(true);
-                webView1.loadUrl("http://www.wellnessatresort.net");
+//                WebView webView1  = (WebView)getActivity().findViewById(R.id.webView);
+//                webView1.getSettings().setJavaScriptEnabled(true);
+//                webView1.loadUrl("http://www.wellnessatresort.net");
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.btnWebLink3:
                 Log.d("debug","Open Weblink3 clicked");
-                WebView webView2  = (WebView)getActivity().findViewById(R.id.webView);
-                webView2.getSettings().setJavaScriptEnabled(true);
-                webView2.loadUrl("http://www.sahakornwellness.com");
+//                WebView webView2  = (WebView)getActivity().findViewById(R.id.webView);
+//                webView2.getSettings().setJavaScriptEnabled(true);
+//                webView2.loadUrl("http://www.sahakornwellness.com");
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.btnWebLink4:
                 Log.d("debug","Open Weblink4 clicked");
-                WebView webView3  = (WebView)getActivity().findViewById(R.id.webView);
-                webView3.getSettings().setJavaScriptEnabled(true);
-                webView3.loadUrl("http://www.wellnesscity.co.th");
+//                WebView webView3  = (WebView)getActivity().findViewById(R.id.webView);
+//                webView3.getSettings().setJavaScriptEnabled(true);
+//                webView3.loadUrl("http://www.wellnesscity.co.th");
                 mDrawerLayout.closeDrawers();
                 break;
         }

@@ -11,4 +11,5 @@
     <color name="colorInfo">#0091EA</color>
     <color name="colorHint">#c1c1c1</color>
     <color name="colorNavBackground">#DADADA</color>
+    <color name="colorDangerous">#F44336</color>
 </resources>

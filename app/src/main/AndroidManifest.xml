@@ -31,7 +31,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".Controller.Activity.SignUpActivity" />
-        <activity android:name=".Controller.Activity.ResetPasswordActivity"></activity>
+        <activity android:name=".Controller.Activity.ResetPasswordActivity" />
+        <activity android:name=".Controller.Activity.PromotionActivity"></activity>
     </application>
 
 </manifest>
