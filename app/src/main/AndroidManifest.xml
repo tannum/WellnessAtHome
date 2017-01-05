@@ -32,7 +32,8 @@
         </activity>
         <activity android:name=".Controller.Activity.SignUpActivity" />
         <activity android:name=".Controller.Activity.ResetPasswordActivity" />
-        <activity android:name=".Controller.Activity.PromotionActivity"></activity>
+        <activity android:name=".Controller.Activity.PromotionActivity" />
+        <activity android:name=".Controller.Activity.AppointmentActivity"></activity>
     </application>
 
 </manifest>

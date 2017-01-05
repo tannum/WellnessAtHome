@@ -63,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_emergency:
                 break;
             case R.id.action_appointment:
+                startActivity(new Intent(MainActivity.this,AppointmentActivity.class));
                 break;
             case R.id.action_promotion:
                 startActivity(new Intent(MainActivity.this,PromotionActivity.class));
