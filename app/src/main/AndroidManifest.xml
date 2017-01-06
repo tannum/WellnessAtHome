@@ -3,6 +3,15 @@
     package="com.bjl.tannum.wellnessathome">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -33,7 +42,16 @@
         <activity android:name=".Controller.Activity.SignUpActivity" />
         <activity android:name=".Controller.Activity.ResetPasswordActivity" />
         <activity android:name=".Controller.Activity.PromotionActivity" />
-        <activity android:name=".Controller.Activity.AppointmentActivity"></activity>
+        <activity android:name=".Controller.Activity.AppointmentActivity" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDVJxrKEF0keO4nJgR9dSkLSiGdr4AwttA" />
+
+        <activity android:name=".Controller.Activity.LocationActivity"></activity>
     </application>
 
 </manifest>

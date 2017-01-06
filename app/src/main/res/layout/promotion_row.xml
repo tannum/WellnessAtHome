@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:background="@color/cardview_light_background"
+    android:layout_height="350dp">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
@@ -32,15 +33,16 @@
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
                 android:text="header content"
                 android:textSize="@dimen/medium_header_font_size"
-                android:maxLines="2"/>
+                android:maxLines="3"/>
         </LinearLayout>
     </LinearLayout>
     <TextView
         android:id="@+id/promotion_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="20"
         android:text="Content"
         android:textSize="@dimen/small_content_font_size"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+        android:layout_marginLeft="@dimen/activity_horizontal_margin" />
 
 </LinearLayout>

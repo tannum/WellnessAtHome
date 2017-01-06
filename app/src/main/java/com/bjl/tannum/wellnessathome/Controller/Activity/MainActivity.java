@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this,PromotionActivity.class));
                 break;
             case R.id.action_location:
+                startActivity(new Intent(MainActivity.this,LocationActivity.class));
                 break;
             case R.id.action_logout:
                 break;
