@@ -23,7 +23,7 @@
         />
 
     <ListView
-        android:id="@+id/bookings_listview"
+        android:id="@+id/bookings_listview1"
         android:layout_below="@+id/compactcalendar_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
