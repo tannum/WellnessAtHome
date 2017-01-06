@@ -25,17 +25,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         //Mask: setup tool bar
         toolbar = (Toolbar)findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar()
 
         //Mask: setup navigation drawer
         NavigationDrawerFragment drawderFragment = (NavigationDrawerFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
         drawderFragment.setUp(R.id.fragment_navigation_drawer,(DrawerLayout)findViewById(R.id.drawer_layout),toolbar);
-
 
         //Mask: ViewPager
         WellnesWebAdapter wellnesWebAdapter = new WellnesWebAdapter(getSupportFragmentManager());

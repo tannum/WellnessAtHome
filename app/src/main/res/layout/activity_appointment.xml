@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:scrollbars="vertical">
 
-    <com.github.sundeepk.compactcalendarview.CompactCalendarView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/compactcalendar_view"
-        android:layout_width="fill_parent"
-        android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:layout_height="250dp"
-        app:compactCalendarTargetHeight="250dp"
-        app:compactCalendarTextSize="12sp"
-        app:compactCalendarBackgroundColor="#ffe95451"
-        app:compactCalendarTextColor="#fff"
-        app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
-        app:compactCalendarCurrentDayBackgroundColor="#B71C1C"
-        app:compactCalendarMultiEventIndicatorColor="#fff" />
+    <include android:id="@+id/too_bar"
+        layout="@layout/calendar_bar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
 
+    <com.bjl.tannum.wellnessathome.Controller.Library.SlidingTabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:background="#ffe95451"/>
 
-</RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/calendar_pager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>
