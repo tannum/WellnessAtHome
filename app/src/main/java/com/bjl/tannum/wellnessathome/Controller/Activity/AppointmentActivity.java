@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.CalendarView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.bjl.tannum.wellnessathome.Controller.Library.SlidingTabLayout;
 import com.bjl.tannum.wellnessathome.R;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 
 import java.util.Date;
 import java.util.Locale;
@@ -56,6 +58,12 @@ public class AppointmentActivity extends AppCompatActivity {
             }
         });
         tabs.setViewPager(pager);
+
+        //Init FAB button
+        ImageView imageView = new ImageView(this);
+        imageView.setImageResource(R.mipmap.ic_launcher);
+
+        FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(imageView).build();
 
     }
 
