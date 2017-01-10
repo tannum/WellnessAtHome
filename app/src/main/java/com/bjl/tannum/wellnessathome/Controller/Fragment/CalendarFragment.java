@@ -79,8 +79,8 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
         compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
         compactCalendarView.invalidate();
 
-        addEvents(-1, -1);
-        addEvents(Calendar.DECEMBER, -1);
+        //addEvents(-1, -1);
+        //addEvents(Calendar.DECEMBER, -1);
 
 
         //Mask: Set initial title
@@ -120,50 +120,78 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
         return view;
     }
 
-    private void addEvents(int month, int year) {
-        currentCalendar.setTime(new Date());
-        currentCalendar.set(Calendar.DAY_OF_MONTH, 1);
-        Date firstDayOfMonth = currentCalendar.getTime();
-        for (int i = 0; i < 6; i++) {
-            currentCalendar.setTime(firstDayOfMonth);
-            if (month > -1) {
-                currentCalendar.set(Calendar.MONTH, month);
-            }
-            if (year > -1) {
-                currentCalendar.set(Calendar.ERA, GregorianCalendar.AD);
-                currentCalendar.set(Calendar.YEAR, year);
-            }
-            currentCalendar.add(Calendar.DATE, i);
-            setToMidnight(currentCalendar);
-            long timeInMillis = currentCalendar.getTimeInMillis();
+    private void addEvent(int day , int month , int year, int hour, int min){
 
-            List<Event> events = getEvents(timeInMillis, i);
-           // Log.d("debug","Event time " + currentCalendar.getTime());
-            compactCalendarView.addEvents(events);
-        }
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        calendar.set(Calendar.DAY_OF_MONTH,day);
+        calendar.set(Calendar.MONTH,month-1);
+        calendar.set(Calendar.YEAR,year);
+        calendar.set(Calendar.HOUR_OF_DAY , hour);
+        calendar.set(Calendar.MINUTE,min);
+        calendar.set(Calendar.SECOND,0);
+        calendar.set(Calendar.MILLISECOND,0);
+
+
+        long timeInMillis = calendar.getTimeInMillis();
+        List<Event> events = Arrays.asList(new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)));
+        compactCalendarView.addEvents(events);
     }
 
-    private List<Event> getEvents(long timeInMillis, int day) {
-        if (day < 2) {
-            return Arrays.asList(new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)));
-        } else if ( day > 2 && day <= 4) {
-            return Arrays.asList(
-                    new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)),
-                    new Event(Color.argb(255, 100, 68, 65), timeInMillis, "Event 2 at " + new Date(timeInMillis)));
-        } else {
-            return Arrays.asList(
-                    new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis) ),
-                    new Event(Color.argb(255, 100, 68, 65), timeInMillis, "Event 2 at " + new Date(timeInMillis)),
-                    new Event(Color.argb(255, 70, 68, 65), timeInMillis, "Event 3 at " + new Date(timeInMillis)));
-        }
-    }
 
-    private void setToMidnight(Calendar calendar) {
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
-    }
+
+
+//    private void addEvents(int month, int year) {
+//        currentCalendar.setTime(new Date());
+//        currentCalendar.set(Calendar.DAY_OF_MONTH, 1);
+//        Date firstDayOfMonth = currentCalendar.getTime();
+//        for (int i = 0; i < 6; i++) {
+//            currentCalendar.setTime(firstDayOfMonth);
+//            if (month > -1) {
+//                currentCalendar.set(Calendar.MONTH, month);
+//            }
+//            if (year > -1) {
+//                currentCalendar.set(Calendar.ERA, GregorianCalendar.AD);
+//                currentCalendar.set(Calendar.YEAR, year);
+//            }
+//            currentCalendar.add(Calendar.DATE, i);
+//            setToMidnight(currentCalendar);
+//            long timeInMillis = currentCalendar.getTimeInMillis();
+//
+//            List<Event> events = getEvents(timeInMillis, i);
+//           // Log.d("debug","Event time " + currentCalendar.getTime());
+//            compactCalendarView.addEvents(events);
+//        }
+//    }
+
+
+
+
+
+
+
+
+
+//    private List<Event> getEvents(long timeInMillis, int day) {
+//        if (day < 2) {
+//            return Arrays.asList(new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)));
+//        } else if ( day > 2 && day <= 4) {
+//            return Arrays.asList(
+//                    new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)),
+//                    new Event(Color.argb(255, 100, 68, 65), timeInMillis, "Event 2 at " + new Date(timeInMillis)));
+//        } else {
+//            return Arrays.asList(
+//                    new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis) ),
+//                    new Event(Color.argb(255, 100, 68, 65), timeInMillis, "Event 2 at " + new Date(timeInMillis)),
+//                    new Event(Color.argb(255, 70, 68, 65), timeInMillis, "Event 3 at " + new Date(timeInMillis)));
+//        }
+//    }
+
+//    private void setToMidnight(Calendar calendar) {
+//        calendar.set(Calendar.HOUR_OF_DAY, 0);
+//        calendar.set(Calendar.MINUTE, 0);
+//        calendar.set(Calendar.SECOND, 0);
+//        calendar.set(Calendar.MILLISECOND, 0);
+//    }
 
 
     @Override
@@ -171,15 +199,24 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == SECOND_ACTIVITY_RESULT_CODE){
             if(resultCode == RESULT_OK){
+
                 String title = data.getStringExtra("keyBookingTitle");
+                String bookingDate= data.getStringExtra("keyBookingDate");
                 String bookingTime = data.getStringExtra("keyBookingTime");
                 int reminderId = data.getIntExtra("keyReminderId",0);
+                Log.d("debug","Booking Event = "+ title + " " + bookingDate + " " + bookingTime + " " + String.valueOf(reminderId));
 
 
 
-
-
-                Log.d("debug","Booking Event = "+ title + " " + bookingTime + " " + String.valueOf(reminderId));
+                String[] date = bookingDate.split("/");
+                String[] time = bookingTime.split(":");
+                Log.d("debug","splite_date: " + date[0] + " " + date[1] + " " + date[2]);
+                Log.d("debug","splite_time: " + time[0] + " " + time[1]);
+                addEvent(Integer.valueOf(date[0]),
+                        Integer.valueOf(date[1]),
+                        Integer.valueOf(date[2]),
+                        Integer.valueOf(time[0]),
+                        Integer.valueOf(time[1]));
             }
         }
     }

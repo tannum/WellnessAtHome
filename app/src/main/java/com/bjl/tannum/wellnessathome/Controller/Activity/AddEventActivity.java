@@ -53,6 +53,13 @@ public class AddEventActivity extends AppCompatActivity
         btnCancelBooking.setOnClickListener(this);
         btnSaveBooking.setOnClickListener(this);
 
+
+        //Input default datetime
+        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+        SimpleDateFormat  sdf = new SimpleDateFormat("dd/MM/yyyy");
+        btnAddBookingDate.setText(sdf.format(calendar.getTime()));
+        btnAddBookingTime.setText(DateFormat.getTimeFormat(this).format(calendar.getTime()));
+
     }
 
     @Override
@@ -82,10 +89,12 @@ public class AddEventActivity extends AppCompatActivity
         }
         else if(v == btnSaveBooking){
             String title = editTextAddTitle.getText().toString();
+            String booking_date = btnAddBookingDate.getText().toString();
             String booking_time = btnAddBookingTime.getText().toString();
             int reminderId = radReminderGroup.getCheckedRadioButtonId();
             Intent intent = new Intent();
             intent.putExtra("keyBookingTitle",title);
+            intent.putExtra("keyBookingDate",booking_date);
             intent.putExtra("keyBookingTime",booking_time);
             intent.putExtra("keyReminderId",reminderId);
             setResult(RESULT_OK,intent);
@@ -99,7 +108,7 @@ public class AddEventActivity extends AppCompatActivity
 
         Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.set(year,monthOfYear,dayOfMonth);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String now = sdf.format(cal.getTime());
         btnAddBookingDate.setText(now);
 
@@ -108,7 +117,8 @@ public class AddEventActivity extends AppCompatActivity
 
     @Override
     public void onTimeSet(ViewGroup viewGroup, int hourOfDay, int minute) {
-        Calendar cal = new java.util.GregorianCalendar();
+        //Calendar cal = new java.util.GregorianCalendar();
+        Calendar cal = Calendar.getInstance(Locale.getDefault());
         cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
         cal.set(Calendar.MINUTE, minute);
         btnAddBookingTime.setText(DateFormat.getTimeFormat(this).format(cal.getTime()));
