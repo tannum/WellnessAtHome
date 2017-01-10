@@ -2,6 +2,7 @@ package com.bjl.tannum.wellnessathome.Controller.Activity;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.icu.text.SimpleDateFormat;
 import android.support.v4.view.ViewPager;
@@ -9,6 +10,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.format.DateFormat;
+import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CalendarView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,18 +25,24 @@ import com.bjl.tannum.wellnessathome.R;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
+import com.philliphsu.bottomsheetpickers.date.BottomSheetDatePickerDialog;
+import com.philliphsu.bottomsheetpickers.date.DatePickerDialog;
+import com.philliphsu.bottomsheetpickers.time.BottomSheetTimePickerDialog;
+import com.philliphsu.bottomsheetpickers.time.grid.GridTimePickerDialog;
+import com.philliphsu.bottomsheetpickers.time.numberpad.NumberPadTimePickerDialog;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class AppointmentActivity extends AppCompatActivity {
-
     private Toolbar toolbar;
     private ViewPager pager;
     private MakeAppointmentAdapter adapter;
     private SlidingTabLayout tabs;
     private CharSequence titles[]= {"Home","Events"};
     private int numberOfTabs = 2;
+    FloatingActionButton actionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +69,6 @@ public class AppointmentActivity extends AppCompatActivity {
             }
         });
         tabs.setViewPager(pager);
-
-        //Init FAB button
-        ImageView imageView = new ImageView(this);
-        imageView.setImageResource(R.mipmap.ic_launcher);
-
-        FloatingActionButton actionButton = new FloatingActionButton.Builder(this).setContentView(imageView).build();
-
     }
 
 
@@ -74,4 +78,7 @@ public class AppointmentActivity extends AppCompatActivity {
         super.onBackPressed();
         finish();
     }
+
+
+
 }

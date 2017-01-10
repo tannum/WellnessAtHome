@@ -38,5 +38,6 @@ dependencies {
     compile 'com.github.sundeepk:compact-calendar-view:1.9.7'
     compile 'com.google.android.gms:play-services-maps:7.5.0'
     compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    compile 'com.philliphsu:bottomsheetpickers:2.1.1'
     testCompile 'junit:junit:4.12'
 }
