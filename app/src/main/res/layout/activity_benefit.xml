@@ -13,6 +13,8 @@
         android:layout_height="150dp"
         android:src="@drawable/logo2"/>
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/benefit_list"
+        android:background="@color/colorWhiteBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>

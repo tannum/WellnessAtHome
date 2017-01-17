@@ -14,6 +14,8 @@ import com.bjl.tannum.wellnessathome.Model.BenefitInfo;
 import com.bjl.tannum.wellnessathome.Model.promotionItemInfo;
 import com.bjl.tannum.wellnessathome.R;
 
+import org.w3c.dom.Text;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -27,8 +29,9 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
     Context context;
     private LayoutInflater inflater;
     List<BenefitInfo> benefitInfos = Collections.emptyList();
+    ClickListener clickListener;
 
-
+    //Mask: Constructor
     public BenefitsAdapter(Context context, List<BenefitInfo> benefitInfos) {
 
         inflater = LayoutInflater.from(context);
@@ -36,6 +39,17 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
         this.benefitInfos = benefitInfos;
 
     }
+
+    //Mask: Interface
+    public interface ClickListener{
+        void onBenefitItemClicked(int position,View view);
+    }
+    public void SetOnBenefitItemClickListener(ClickListener clickListener){
+
+        //Mask: Initial click listener.
+        this.clickListener = clickListener;
+    }
+
 
 
     @Override
@@ -52,7 +66,8 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
 
         BenefitInfo info = benefitInfos.get(position);
         holder.thummail.setImageResource(info.getThumbnailId());
-        holder.description.setText(info.getDescription());
+        holder.header.setText(info.getHeader());
+        holder.content.setText(info.getContent());
     }
 
     @Override
@@ -61,10 +76,11 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
     }
 
 
-    class BenefitItemsHolder extends RecyclerView.ViewHolder{
+    class BenefitItemsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView thummail;
-        TextView description;
+        TextView header;
+        TextView content;
         Button viewBenefit;
 
 
@@ -73,10 +89,15 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
 
 
             thummail = (ImageView)itemView.findViewById(R.id.img_benefit);
-            description = (TextView)itemView.findViewById(R.id.txtBenefitDescription);
+            header = (TextView)itemView.findViewById(R.id.txtBenefitHeader);
+            content = (TextView)itemView.findViewById(R.id.txtBenefitContent);
             viewBenefit = (Button)itemView.findViewById(R.id.btnViewBenefit);
-
+            viewBenefit.setOnClickListener(this);
         }
 
+        @Override
+        public void onClick(View v) {
+            clickListener.onBenefitItemClicked(getAdapterPosition(),v);
+        }
     }
 }

@@ -6,14 +6,30 @@ package com.bjl.tannum.wellnessathome.Model;
 
 public class BenefitInfo {
     int thumbnailId;
-    String description;
+    String header;
+    String content;
 
-    public String getDescription() {
-        return description;
+    public BenefitInfo(String content, String header, int thumbnailId) {
+        this.content = content;
+        this.header = header;
+        this.thumbnailId = thumbnailId;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getHeader() {
+        return header;
+    }
+
+    public void setHeader(String header) {
+        this.header = header;
     }
 
     public int getThumbnailId() {
