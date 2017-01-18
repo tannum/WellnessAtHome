@@ -81,17 +81,21 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
         ImageView thummail;
         TextView header;
         TextView content;
+        TextView benefitTotal;
+        TextView benefitRest;
         Button viewBenefit;
+
 
 
         public BenefitItemsHolder(View itemView) {
             super(itemView);
 
-
             thummail = (ImageView)itemView.findViewById(R.id.img_benefit);
             header = (TextView)itemView.findViewById(R.id.txtBenefitHeader);
             content = (TextView)itemView.findViewById(R.id.txtBenefitContent);
             viewBenefit = (Button)itemView.findViewById(R.id.btnViewBenefit);
+            benefitTotal = (TextView)itemView.findViewById(R.id.txtBenefitTotal);
+            benefitRest = (TextView)itemView.findViewById(R.id.txtBenefitRest);
             viewBenefit.setOnClickListener(this);
         }
 

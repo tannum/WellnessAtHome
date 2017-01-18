@@ -60,7 +60,8 @@
         android:layout_marginRight="16dp"
         android:layout_alignParentEnd="true"
         android:text="forgot?"
-        android:background="@color/colorWhiteBackground"/>
+        android:background="@color/colorWhiteBackground"
+        android:stateListAnimator="@null"/>
     <EditText
         android:id="@+id/editTextUserName"
         android:layout_width="match_parent"

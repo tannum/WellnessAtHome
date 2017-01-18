@@ -1,21 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+
+<android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_benefit"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.BenefitActivity">
+    android:layout_height="match_parent">
 
-    <ImageView
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_benefit"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:src="@drawable/logo2"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/benefit_list"
-        android:background="@color/colorWhiteBackground"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+        android:layout_height="wrap_content"
+        tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.BenefitActivity">
+
+        <ImageView
+            android:id="@+id/imgMainLogo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:src="@drawable/main_logo"/>
+        <include
+            android:id="@+id/app_bar"
+            layout="@layout/app_bar"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/benefit_list"
+            android:background="@color/colorWhiteBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/imgMainLogo">
+        </android.support.v7.widget.RecyclerView>
+    </RelativeLayout>
+
+    <fragment
+
+        android:name="com.bjl.tannum.wellnessathome.Controller.Fragment.NavigationDrawerFragment"
+        android:id="@+id/fragment_navigation_drawer"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:layout="@layout/fragment_navigation_drawer"
+        tools:layout="@layout/fragment_navigation_drawer" />
+
+</android.support.v4.widget.DrawerLayout>
+
+
+
+

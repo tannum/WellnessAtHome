@@ -122,19 +122,20 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
 
     private void addEvent(int day , int month , int year, int hour, int min){
 
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        calendar.set(Calendar.DAY_OF_MONTH,day);
-        calendar.set(Calendar.MONTH,month-1);
-        calendar.set(Calendar.YEAR,year);
-        calendar.set(Calendar.HOUR_OF_DAY , hour);
-        calendar.set(Calendar.MINUTE,min);
-        calendar.set(Calendar.SECOND,0);
-        calendar.set(Calendar.MILLISECOND,0);
+//        Calendar calendar = Calendar.getInstance(Locale.getDefault());
+//        calendar.set(Calendar.DAY_OF_MONTH,day);
+//        calendar.set(Calendar.MONTH,month);
+//        calendar.set(Calendar.YEAR,year);
+//        calendar.set(Calendar.HOUR_OF_DAY , hour);
+//        calendar.set(Calendar.MINUTE,min);
+//        calendar.set(Calendar.SECOND,0);
+//        calendar.set(Calendar.MILLISECOND,0);
 
+        //Log.d("debug","Event time = " + calendar.getTime());
 
-        long timeInMillis = calendar.getTimeInMillis();
-        List<Event> events = Arrays.asList(new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)));
-        compactCalendarView.addEvents(events);
+        //long timeInMillis = calendar.getTimeInMillis();
+        //List<Event> events = Arrays.asList(new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)));
+        //compactCalendarView.addEvents(events);
     }
 
 
@@ -212,11 +213,16 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
                 String[] time = bookingTime.split(":");
                 Log.d("debug","splite_date: " + date[0] + " " + date[1] + " " + date[2]);
                 Log.d("debug","splite_time: " + time[0] + " " + time[1]);
-                addEvent(Integer.valueOf(date[0]),
-                        Integer.valueOf(date[1]),
-                        Integer.valueOf(date[2]),
-                        Integer.valueOf(time[0]),
-                        Integer.valueOf(time[1]));
+//                addEvent(Integer.valueOf(date[0]),
+//                        Integer.valueOf(date[1]),
+//                        Integer.valueOf(date[2]),
+//                        Integer.valueOf(time[0]),
+//                        Integer.valueOf(time[1]));
+                addEvent(0,
+                        0,
+                        0,
+                        0,
+                       0);
             }
         }
     }

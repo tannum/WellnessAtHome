@@ -13,4 +13,5 @@
     <color name="colorNavBackground">#DADADA</color>
     <color name="colorDangerous">#F44336</color>
     <color name="colorBlack">#000</color>
+    <color name="actionbar_opacity">#33000000</color>
 </resources>
