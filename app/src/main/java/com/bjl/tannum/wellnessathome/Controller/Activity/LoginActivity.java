@@ -58,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             boolean result = LoginHandler();
             if(result == true){
                 Log.d("debug","Login Success+++");
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                Intent intent = new Intent(LoginActivity.this, BenefitActivity.class);
                 startActivity(intent);
                 //Mask: Close this activity
                 finish();
