@@ -5,46 +5,88 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardCornerRadius="1dp"
-    app:contentPadding="20dp"
-    app:contentPaddingBottom="0dp"
-    app:cardElevation="10dp"
-    android:layout_marginBottom="10dp">
+    app:contentPadding="10dp"
+    app:cardElevation="1dp"
+    android:layout_marginBottom="1dp">
 
 
-
-    <LinearLayout
+    <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:columnCount="4"
+        android:rowCount="1">
+        <com.mikhaellopez.circularimageview.CircularImageView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_column="0"
+            android:id="@+id/officer_pic"
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:src="@drawable/no_pic1"
+            android:layout_gravity="center"
+            app:civ_border_color="@color/colorWhiteSmoke"
+            app:civ_border_width="0dp" />
+        <TextView
+            android:id="@+id/officer_name"
+            android:layout_column="1"
+            android:text="Dr.Suttisak\nSangtong"
+            android:layout_gravity="center"
+            android:maxLines="2"
+            android:layout_marginLeft="16dp"/>
+        <TextView
+            android:id="@+id/txtAvailable_time"
+            android:layout_column="2"
+            android:text="12.00-18.00"
+            android:layout_gravity="center"
+            android:maxLines="2"
+            android:layout_marginLeft="16dp"/>
 
-
-        <LinearLayout
-            android:layout_width="100dp"
+        <Button
+            android:id="@+id/btnBooking"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#3fb399"
-            android:orientation="vertical"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2017"
-                android:textSize="24dp"
-                android:textColor="#ffffff"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="July"
-                android:textSize="24dp"
-                android:textColor="#ffffff"/>
+            android:layout_gravity="center"
+            android:layout_column="3"
+            android:background="@color/colorWhiteBackground"
+            android:text="Booking"
+            android:textColor="@color/colorInfo"
+            android:stateListAnimator="@null"/>
+    </GridLayout>
 
 
 
-        </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal">-->
+
+
+        <!--&lt;!&ndash;<LinearLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="60dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="#3fb399"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:orientation="vertical"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:gravity="center">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="60dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="July"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="24dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="#ffffff"/>&ndash;&gt;-->
+            <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_width="60dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:layout_height="60dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:gravity="center"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:text="3"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textSize="24dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:textColor="#206757"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:background="@color/colorWhiteBackground"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</LinearLayout>&ndash;&gt;-->
 
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
 
 

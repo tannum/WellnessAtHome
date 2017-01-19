@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.bjl.tannum.wellnessathome.Controller.Activity.AddEventActivity;
+import com.bjl.tannum.wellnessathome.Controller.Adapter.BookingAdapter;
+import com.bjl.tannum.wellnessathome.Model.BookingInfo;
 import com.bjl.tannum.wellnessathome.R;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
@@ -38,7 +42,7 @@ import static android.app.Activity.RESULT_OK;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CalendarFragment extends Fragment implements View.OnClickListener{
+public class CalendarFragment extends Fragment implements View.OnClickListener ,BookingAdapter.ClickListener{
 
 
     private Calendar currentCalendar = Calendar.getInstance(Locale.getDefault());
@@ -47,6 +51,12 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
     private CompactCalendarView compactCalendarView;
     private ActionBar toolbar;
     FloatingActionButton actionButton;
+
+    List<BookingInfo> bookingInfos;
+    RecyclerView recyclerView;
+    BookingAdapter bookingAdapter;
+
+
 
     private static final int SECOND_ACTIVITY_RESULT_CODE = 0;
 
@@ -60,28 +70,20 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_calendar,container,false);
 
-        //Mask: Init ListView
-        final List<String> mutableBookings = new ArrayList<>();
-        final ListView bookingsListView = (ListView) view.findViewById(R.id.bookings_listview);
-        final ArrayAdapter adapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, mutableBookings);
-        bookingsListView.setAdapter(adapter);
 
-
+        //Mask: Init RecyclerView
+        bookingInfos = new ArrayList<BookingInfo>();
+        recyclerView = (RecyclerView)view.findViewById(R.id.available_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        bookingAdapter = new BookingAdapter(getContext(),bookingInfos);
+        bookingAdapter.SetOnBookingItemClickListener(this);
+        recyclerView.setAdapter(bookingAdapter);
 
         //Mask: Init CompactCalendarView.
         compactCalendarView = (CompactCalendarView) view.findViewById(R.id.compactcalendar_view);
-
-        // below allows you to configure color for the current day in the month
-        // compactCalendarView.setCurrentDayBackgroundColor(getResources().getColor(R.color.black));
-        // below allows you to configure colors for the current day the user has selected
-        // compactCalendarView.setCurrentSelectedDayBackgroundColor(getResources().getColor(R.color.dark_red));
         compactCalendarView.setUseThreeLetterAbbreviation(false);
         compactCalendarView.setFirstDayOfWeek(Calendar.MONDAY);
         compactCalendarView.invalidate();
-
-        //addEvents(-1, -1);
-        //addEvents(Calendar.DECEMBER, -1);
-
 
         //Mask: Set initial title
         toolbar = ((AppCompatActivity) getActivity()).getSupportActionBar();
@@ -90,16 +92,27 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
         compactCalendarView.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
-                toolbar.setTitle(dateFormatForMonth.format(dateClicked));
-                Log.d("debug", "inside onclick " + dateFormatForDisplaying.format(dateClicked));
-                List<Event> bookingsFromMap = compactCalendarView.getEvents(dateClicked);
-                if(bookingsFromMap != null){
-                    Log.d("debug", bookingsFromMap.toString());
-                    mutableBookings.clear();
-                    for(Event booking : bookingsFromMap){
-                        mutableBookings.add((String)booking.getData());
-                    }
-                    adapter.notifyDataSetChanged();
+
+                SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss");
+                String[] dt = format.format(dateClicked.getTime()).split("-");
+                int dom = Integer.valueOf(dt[0]);
+
+
+                bookingInfos.clear();
+                bookingAdapter.notifyDataSetChanged();
+                if((dom % 2) == 0){
+                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingAdapter.notifyDataSetChanged();
+
+                }
+                else {
+                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingAdapter.notifyDataSetChanged();
+
                 }
             }
 
@@ -110,12 +123,37 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
         });
 
 
-        //Init FAB button
-        ImageView imageView = new ImageView(getActivity());
-        imageView.setImageResource(R.mipmap.ic_launcher);
-        actionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
-        actionButton.setOnClickListener(this);
+//        //Init FAB button
+//        ImageView imageView = new ImageView(getActivity());
+//        imageView.setImageResource(R.mipmap.ic_launcher);
+//        actionButton = new FloatingActionButton.Builder(getActivity()).setContentView(imageView).build();
+//        actionButton.setOnClickListener(this);
 
+
+
+        //Mask: Make Calender event information
+        Calendar calendar = Calendar.getInstance();
+        Date today = calendar.getTime();
+        for(int i = 0;i<5;i++){
+            calendar.setTime(today);
+            calendar.add(Calendar.DATE,i);
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyy-hh-mm-ss");
+            String dt[] = format.format(calendar.getTime()).split("-");
+            addEvent(Integer.valueOf(dt[0]),
+                    Integer.valueOf(dt[1])-1,
+                    Integer.valueOf(dt[2]),
+                    Integer.valueOf(dt[3]),
+                    Integer.valueOf(dt[4]));
+        }
+
+        //Mask: Make Dummy officer available information.
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
 
         return view;
     }
@@ -171,12 +209,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
 //        }
 //    }
 
-//    private void setToMidnight(Calendar calendar) {
-//        calendar.set(Calendar.HOUR_OF_DAY, 0);
-//        calendar.set(Calendar.MINUTE, 0);
-//        calendar.set(Calendar.SECOND, 0);
-//        calendar.set(Calendar.MILLISECOND, 0);
-//    }
+
 
 
     @Override
@@ -189,21 +222,18 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
                 String bookingDate= data.getStringExtra("keyBookingDate");
                 String bookingTime = data.getStringExtra("keyBookingTime");
                 int reminderId = data.getIntExtra("keyReminderId",0);
-
-
-
                 Log.d("debug","Booking Event = "+ title + " " + bookingDate + " " + bookingTime + " " + String.valueOf(reminderId));
 
                 String[] date = bookingDate.split("/");
                 String[] time = bookingTime.substring(0,5).split(":");
-                Log.d("debug","splite_date: " + date[0] + " " + date[1] + " " + date[2]);
-                Log.d("debug","splite_time: " + time[0] + " " + time[1]);
+//                Log.d("debug","splite_date: " + date[0] + " " + date[1] + " " + date[2]);
+//                Log.d("debug","splite_time: " + time[0] + " " + time[1]);
 
-                addEvent(Integer.valueOf(date[0]),
-                        Integer.valueOf(date[1])-1,
-                        Integer.valueOf(date[2]),
-                        Integer.valueOf(time[0]),
-                        Integer.valueOf(time[1]));
+//                addEvent(Integer.valueOf(date[0]),
+//                        Integer.valueOf(date[1])-1,
+//                        Integer.valueOf(date[2]),
+//                        Integer.valueOf(time[0]),
+//                        Integer.valueOf(time[1]));
             }
         }
     }
@@ -219,7 +249,7 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
         calendar.set(Calendar.SECOND,0);
         calendar.set(Calendar.MILLISECOND,0);
 
-        Log.d("debug","Event time = " + calendar.getTime());
+        //Log.d("debug","Event time = " + calendar.getTime());
 
         long timeInMillis = calendar.getTimeInMillis();
         List<Event> events = Arrays.asList(new Event(Color.argb(255, 169, 68, 65), timeInMillis, "Event at " + new Date(timeInMillis)));
@@ -234,4 +264,14 @@ public class CalendarFragment extends Fragment implements View.OnClickListener{
             startActivityForResult(intent,SECOND_ACTIVITY_RESULT_CODE);
         }
     }
+
+    @Override
+    public void onBookingItemClicked(int position, View view) {
+        Log.d("debug","On booking click , position = " + String.valueOf(position));
+        Intent intent = new Intent(getActivity(),AddEventActivity.class);
+        startActivityForResult(intent,SECOND_ACTIVITY_RESULT_CODE);
+    }
+
+
+
 }
