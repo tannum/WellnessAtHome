@@ -7,9 +7,11 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bjl.tannum.wellnessathome.Model.PromotionInfo;
 import com.bjl.tannum.wellnessathome.Model.promotionItemInfo;
 import com.bjl.tannum.wellnessathome.R;
 
@@ -23,10 +25,11 @@ import java.util.List;
 public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.PromotionItemsHolder>{
 
     private LayoutInflater inflater;
-    List<promotionItemInfo> promotionItemInfos = Collections.emptyList();
+    List<PromotionInfo> promotionItemInfos = Collections.emptyList();
     Context context;
+    ClickListener clickListener;
 
-    public PromotionAdapter(Context context ,List<promotionItemInfo> promotionItemInfos) {
+    public PromotionAdapter(Context context ,List<PromotionInfo> promotionItemInfos) {
         inflater = LayoutInflater.from(context);
         this.promotionItemInfos = promotionItemInfos;
         this.context = context;
@@ -42,12 +45,11 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
 
     @Override
     public void onBindViewHolder(PromotionItemsHolder holder, int position) {
-        promotionItemInfo info = promotionItemInfos.get(position);
+        PromotionInfo info = promotionItemInfos.get(position);
 
-        holder.imgPromotion.setImageResource(info.getThumnailId());
-        holder.textViewHeader.setText(info.getTxtPromotionHeader());
-        holder.textViewHeaderContent.setText(info.getTxtPromotionHeaderContent());
-        holder.textViewContent.setText(info.getTxtPromotionContent());
+        holder.thumbnail.setImageResource(info.getThumbnailId());
+        holder.txtPromotionHeader.setText(info.getHeader());
+        holder.txtPromotionContent.setText(info.getContent());
 
 
     }
@@ -57,21 +59,35 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
         return promotionItemInfos.size();
     }
 
-    class PromotionItemsHolder extends RecyclerView.ViewHolder{
+    public interface ClickListener{
+        void onBookingPromotionItemClicked(int position,View view);
+    }
 
-        ImageView imgPromotion;
-        TextView textViewHeader;
-        TextView textViewHeaderContent;
-        TextView textViewContent;
+    public void SetOnBookingPromotionItemClickListener(ClickListener clickListener){
+        this.clickListener = clickListener;
+    }
+
+
+    class PromotionItemsHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        ImageView thumbnail;
+        TextView txtPromotionHeader;
+        TextView txtPromotionContent;
+        Button btnBookingPromotion;
 
         public PromotionItemsHolder(View itemView) {
             super(itemView);
 
-            imgPromotion = (ImageView)itemView.findViewById(R.id.image_promotion);
-            textViewHeader = (TextView)itemView.findViewById(R.id.promotion_header);
-            textViewHeaderContent = (TextView)itemView.findViewById(R.id.promotion_header_content);
-            textViewContent = (TextView)itemView.findViewById(R.id.promotion_content);
+            thumbnail = (ImageView)itemView.findViewById(R.id.image_promotion);
+            txtPromotionHeader = (TextView)itemView.findViewById(R.id.promotion_header_content);
+            txtPromotionContent = (TextView)itemView.findViewById(R.id.promotion_content);
+            btnBookingPromotion = (Button)itemView.findViewById(R.id.btnBookingPromotion);
+            btnBookingPromotion.setOnClickListener(this);
+        }
 
+        @Override
+        public void onClick(View v) {
+            clickListener.onBookingPromotionItemClicked(getAdapterPosition(),v);
         }
     }
 }

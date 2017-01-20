@@ -11,11 +11,7 @@ public class BenefitInfo {
     int benefit_total;
     int benefit_rest;
 
-//    public BenefitInfo(String content, String header, int thumbnailId) {
-//        this.content = content;
-//        this.header = header;
-//        this.thumbnailId = thumbnailId;
-//    }
+
 
 
     public BenefitInfo( String content, String header, int thumbnailId, int benefit_total, int benefit_rest) {

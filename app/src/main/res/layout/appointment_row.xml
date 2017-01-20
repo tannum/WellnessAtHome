@@ -45,73 +45,67 @@
                 app:civ_border_width="0dp" />
 
 
-            <TextView
-                android:id="@+id/txtAppointmentOfficeName"
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="Doctor Name"
-                android:textSize="@dimen/header_content_font_size"
-                android:layout_marginRight="@dimen/activity_horizontal_margin" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtAppointmentOfficeName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:text="Doctor Name"
+                    android:textSize="@dimen/header_content_font_size"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin" />
+
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:columnCount="5"
+                    android:rowCount="3">
+
+                    <ImageView
+                        android:layout_marginTop="16dp"
+                        android:layout_column="0"
+                        android:layout_row="0"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:src="@mipmap/ic_query_builder_black_24dp"
+                        android:layout_gravity="left|center" />
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/txtAppointmentTime"
+                        android:layout_column="1"
+                        android:layout_row="0"
+                        android:text="15.30"
+                        android:textColor="@color/colorInfo"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="16dp"/>
+                    <ImageView
+                        android:layout_marginTop="16dp"
+                        android:layout_column="2"
+                        android:layout_row="0"
+                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                        android:src="@mipmap/ic_location_on_black_24dp"
+                        android:layout_gravity="left|center" />
+                    <TextView
+                        android:layout_marginTop="16dp"
+                        android:id="@+id/txtAppointmentLocation"
+                        android:layout_column="3"
+                        android:layout_row="0"
+                        android:text="Hostpital"
+                        android:textColor="@color/colorInfo"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="16dp"/>
+
+                </GridLayout>
+            </LinearLayout>
+
         </LinearLayout>
-        <include layout="@layout/separator"/>
-
-
-
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:columnCount="5"
-            android:rowCount="3">
-
-            <ImageView
-                android:layout_marginTop="16dp"
-                android:layout_column="0"
-                android:layout_row="1"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:src="@mipmap/ic_query_builder_black_24dp"
-                android:layout_gravity="left|center" />
-            <TextView
-                android:layout_marginTop="16dp"
-                android:id="@+id/txtAppointmentTime"
-                android:layout_column="1"
-                android:layout_row="1"
-                android:text="15.30"
-                android:textColor="@color/colorInfo"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="16dp"/>
-            <ImageView
-                android:layout_marginTop="16dp"
-                android:layout_column="0"
-                android:layout_row="2"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:src="@mipmap/ic_location_on_black_24dp"
-                android:layout_gravity="left|center" />
-            <TextView
-                android:layout_marginTop="16dp"
-                android:id="@+id/txtAppointmentLocation"
-                android:layout_column="1"
-                android:layout_row="2"
-                android:text="Hostpital"
-                android:textColor="@color/colorInfo"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="16dp"/>
-
-        </GridLayout>
-
-
-
-
-        <!--<TextView-->
-            <!--android:id="@+id/txtBenefitContent"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Promotion content"-->
-            <!--android:maxLines="5"/>-->
-        <!--<include layout="@layout/separator"/>-->
-
 
     </LinearLayout>
 

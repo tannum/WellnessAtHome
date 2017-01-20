@@ -1,23 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.MainActivity">
-    <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="Logout"/>
+
+    <item android:title="website">
+        <menu>
+            <group android:checkableBehavior="none">
+                <item android:id="@+id/action_wellness_home"
+                    android:title="wellness home"
+                    android:icon="@mipmap/ic_public_black_24dp"/>
+
+                <item android:id="@+id/action_wellness_city"
+                    android:title="wellness city"
+                    android:icon="@mipmap/ic_public_black_24dp"/>
+
+                <item android:id="@+id/action_wellness_resort"
+                    android:title="wellness resort"
+                    android:icon="@mipmap/ic_public_black_24dp"/>
+
+                <item android:id="@+id/action_wellness_sahakron"
+                    android:title="wellness sahakron"
+                    android:icon="@mipmap/ic_public_black_24dp"/>
+            </group>
+        </menu>
+    </item>
+
     <item
         android:id="@+id/action_promotion"
         android:orderInCategory="100"
         app:showAsAction="never"
-        android:title="Promotion"/>
+        android:title="Promotion"
+        android:icon="@mipmap/ic_home_black_24dp"/>
     <item
         android:id="@+id/action_location"
         android:orderInCategory="100"
         app:showAsAction="never"
         android:title="Location"/>
+    <item
+        android:id="@+id/action_logout"
+        android:orderInCategory="100"
+        app:showAsAction="never"
+        android:title="Logout"/>
 
     <item
         android:id="@+id/action_home"
@@ -39,3 +64,6 @@
         android:title="Home"/>
 
 </menu>
+
+
+

@@ -1,6 +1,16 @@
 package com.bjl.tannum.wellnessathome.Controller.Activity;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.net.Uri;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +21,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bjl.tannum.wellnessathome.Controller.Adapter.BenefitsAdapter;
 import com.bjl.tannum.wellnessathome.Controller.Fragment.NavigationDrawerFragment;
+import com.bjl.tannum.wellnessathome.Controller.Library.CustomLocationManager;
+import com.bjl.tannum.wellnessathome.Controller.Library.GPSTracker;
+import com.bjl.tannum.wellnessathome.Controller.Library.LocationValue;
 import com.bjl.tannum.wellnessathome.Model.BenefitInfo;
 import com.bjl.tannum.wellnessathome.R;
 
@@ -27,6 +41,7 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
     private RecyclerView recyclerView;
     private BenefitsAdapter benefitsAdapter;
     private Toolbar toolbar;
+    final  int MY_PERMISSIONS_ACCESS_LOCATION = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +82,62 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
         recyclerView.setAdapter(benefitsAdapter);
 
 
+
+
+
+        checkPermission();
+
+
+
+
+        GPSTracker gps = new GPSTracker(this);
+        if(gps.canGetLocation()){
+            String latitude = Double.toString(gps.getLatitude());
+            String longitude = Double.toString(gps.getLongitude());
+
+            Log.d("debug","lat = " + latitude + "long = " + longitude);
+            // \n is for new line
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+
     }
+
+
+
+
+    private void checkPermission(){
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                Log.d("debug","AAAAAA");
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_ACCESS_LOCATION);
+                Log.d("debug","BBBBBBBB");
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        }
+    }
+
+
 
 
     @Override
@@ -78,6 +148,19 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
         return true;
     }
 
+    private boolean checkCallPermission()
+    {
+        String permission = "android.permission.CALL_PHONE";
+        int res = getApplicationContext().checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    private void dialContactPhone(final String phoneNumber) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
+    }
+
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -87,6 +170,9 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
             case R.id.action_home:
                 break;
             case R.id.action_emergency:
+
+                dialContactPhone("035249500");
+
                 break;
             case R.id.action_appointment:
                 startActivity(new Intent(BenefitActivity.this,AppointmentActivity.class));
@@ -98,7 +184,30 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
                 startActivity(new Intent(BenefitActivity.this,LocationActivity.class));
                 break;
             case R.id.action_logout:
+                startActivity(new Intent(this,LoginActivity.class));
+                finish();
                 break;
+            case R.id.action_wellness_home:
+                Intent intent_home = new Intent(this,HomepageActivity.class);
+                intent_home.putExtra("URL","home");
+                startActivity(intent_home);
+                break;
+            case R.id.action_wellness_city:
+                Intent intent_city = new Intent(this,HomepageActivity.class);
+                intent_city.putExtra("URL","city");
+                startActivity(intent_city);
+                break;
+            case R.id.action_wellness_resort:
+                Intent intent_resort = new Intent(this,HomepageActivity.class);
+                intent_resort.putExtra("URL","resort");
+                startActivity(intent_resort);
+                break;
+            case R.id.action_wellness_sahakron:
+                Intent intent_sahakron = new Intent(this,HomepageActivity.class);
+                intent_sahakron.putExtra("URL","sahakron");
+                startActivity(intent_sahakron);
+                break;
+
             default:
                 break;
         }
