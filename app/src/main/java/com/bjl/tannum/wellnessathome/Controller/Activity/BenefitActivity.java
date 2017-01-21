@@ -1,13 +1,8 @@
 package com.bjl.tannum.wellnessathome.Controller.Activity;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Criteria;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -21,13 +16,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.bjl.tannum.wellnessathome.Controller.Adapter.BenefitsAdapter;
 import com.bjl.tannum.wellnessathome.Controller.Fragment.NavigationDrawerFragment;
-import com.bjl.tannum.wellnessathome.Controller.Library.CustomLocationManager;
 import com.bjl.tannum.wellnessathome.Controller.Library.GPSTracker;
-import com.bjl.tannum.wellnessathome.Controller.Library.LocationValue;
 import com.bjl.tannum.wellnessathome.Model.BenefitInfo;
 import com.bjl.tannum.wellnessathome.R;
 
@@ -42,6 +34,7 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
     private BenefitsAdapter benefitsAdapter;
     private Toolbar toolbar;
     final  int MY_PERMISSIONS_ACCESS_LOCATION = 0;
+    final  int MY_PERMISSIONS_CALL_PHONE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,62 +75,32 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
         recyclerView.setAdapter(benefitsAdapter);
 
 
-
-
-
-        checkPermission();
-
-
-
-
-        GPSTracker gps = new GPSTracker(this);
-        if(gps.canGetLocation()){
-            String latitude = Double.toString(gps.getLatitude());
-            String longitude = Double.toString(gps.getLongitude());
-
-            Log.d("debug","lat = " + latitude + "long = " + longitude);
-            // \n is for new line
-        }else{
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-        }
+        //Mask: Check Permission
+        CheckLocationPermission();
+        CheckCallPermission();
 
     }
 
+    private void CheckLocationPermission() {
 
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION);
 
-
-    private void checkPermission(){
-        // Here, thisActivity is the current activity
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-
-                Log.d("debug","AAAAAA");
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_ACCESS_LOCATION);
-                Log.d("debug","BBBBBBBB");
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_ACCESS_LOCATION);
         }
     }
+    private void CheckCallPermission() {
 
+        int permissionCheck = ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE);
 
+        if(permissionCheck != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.CALL_PHONE},
+                    MY_PERMISSIONS_ACCESS_LOCATION);
+        }
+    }
 
 
     @Override
@@ -148,18 +111,9 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
         return true;
     }
 
-    private boolean checkCallPermission()
-    {
-        String permission = "android.permission.CALL_PHONE";
-        int res = getApplicationContext().checkCallingOrSelfPermission(permission);
-        return (res == PackageManager.PERMISSION_GRANTED);
-    }
-
     private void dialContactPhone(final String phoneNumber) {
-        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
+        startActivity(new Intent(Intent.ACTION_CALL, Uri.fromParts("tel", phoneNumber, null)));
     }
-
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -170,9 +124,7 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
             case R.id.action_home:
                 break;
             case R.id.action_emergency:
-
                 dialContactPhone("035249500");
-
                 break;
             case R.id.action_appointment:
                 startActivity(new Intent(BenefitActivity.this,AppointmentActivity.class));
@@ -217,5 +169,6 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
     @Override
     public void onBenefitItemClicked(int position, View view) {
         Log.d("debug","position = " + String.valueOf(position));
+        startActivity(new Intent(this,PromotionActivity.class));
     }
 }

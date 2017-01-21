@@ -67,7 +67,7 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
         BenefitInfo info = benefitInfos.get(position);
         holder.thummail.setImageResource(info.getThumbnailId());
         holder.header.setText(info.getHeader());
-        holder.content.setText(info.getContent());
+        //holder.content.setText(info.getContent());
     }
 
     @Override
@@ -92,7 +92,7 @@ public class BenefitsAdapter extends RecyclerView.Adapter<BenefitsAdapter.Benefi
 
             thummail = (ImageView)itemView.findViewById(R.id.img_benefit);
             header = (TextView)itemView.findViewById(R.id.txtBenefitHeader);
-            content = (TextView)itemView.findViewById(R.id.txtBenefitContent);
+            //content = (TextView)itemView.findViewById(R.id.txtBenefitContent);
             viewBenefit = (Button)itemView.findViewById(R.id.btnViewBenefit);
             benefitTotal = (TextView)itemView.findViewById(R.id.txtBenefitTotal);
             benefitRest = (TextView)itemView.findViewById(R.id.txtBenefitRest);

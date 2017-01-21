@@ -20,6 +20,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.bjl.tannum.wellnessathome.Controller.Activity.HomepageActivity;
 import com.bjl.tannum.wellnessathome.Controller.Activity.LoginActivity;
 import com.bjl.tannum.wellnessathome.Controller.Activity.MainActivity;
 import com.bjl.tannum.wellnessathome.Controller.Adapter.NavRecyclerviewAdapter;
@@ -113,46 +114,30 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 getActivity().finish();
                 break;
             case R.id.btnWebLink1:
-                Log.d("debug","Open Weblink1 clicked");
+                Intent intent_home = new Intent(getActivity(),HomepageActivity.class);
+                intent_home.putExtra("URL","home");
+                startActivity(intent_home);
                 mDrawerLayout.closeDrawers();
-//                WebView webView  = (WebView)getActivity().findViewById(R.id.webView);
-//                webView.getSettings().setJavaScriptEnabled(true);
-//                webView.loadUrl("http://www.wellnessathomes.net");
-
                 break;
             case R.id.btnWebLink2:
-                Log.d("debug","Open Weblink2 clicked");
-//                WebView webView1  = (WebView)getActivity().findViewById(R.id.webView);
-//                webView1.getSettings().setJavaScriptEnabled(true);
-//                webView1.loadUrl("http://www.wellnessatresort.net");
+                Intent intent_resort = new Intent(getActivity(),HomepageActivity.class);
+                intent_resort.putExtra("URL","resort");
+                startActivity(intent_resort);
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.btnWebLink3:
-                Log.d("debug","Open Weblink3 clicked");
-//                WebView webView2  = (WebView)getActivity().findViewById(R.id.webView);
-//                webView2.getSettings().setJavaScriptEnabled(true);
-//                webView2.loadUrl("http://www.sahakornwellness.com");
+                Intent intent_sahakron = new Intent(getActivity(),HomepageActivity.class);
+                intent_sahakron.putExtra("URL","sahakron");
+                startActivity(intent_sahakron);
                 mDrawerLayout.closeDrawers();
                 break;
             case R.id.btnWebLink4:
-                Log.d("debug","Open Weblink4 clicked");
-//                WebView webView3  = (WebView)getActivity().findViewById(R.id.webView);
-//                webView3.getSettings().setJavaScriptEnabled(true);
-//                webView3.loadUrl("http://www.wellnesscity.co.th");
+                Intent intent_city = new Intent(getActivity(),HomepageActivity.class);
+                intent_city.putExtra("URL","city");
+                startActivity(intent_city);
                 mDrawerLayout.closeDrawers();
                 break;
         }
-
-
-//        if(v.getId() == R.id.btnLogout){
-//            Log.d("debug","Logout button clicked");
-//            mDrawerLayout.closeDrawers();
-//            Intent intent = new Intent(getContext(), LoginActivity.class);
-//            startActivity(intent);
-//            getActivity().finish();
-//        }
-
-
     }
 
 

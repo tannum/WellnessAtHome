@@ -1,6 +1,7 @@
 package com.bjl.tannum.wellnessathome.Controller.Fragment;
 
 
+import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,8 +26,8 @@ public class WellnessSahakornFragment extends Fragment implements SwipeRefreshLa
     private String page_url = "http://www.sahakornwellness.com";
     private SwipeRefreshLayout swipeContainer;
     WebView webView;
-    me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
-
+    //me.zhanghai.android.materialprogressbar.MaterialProgressBar progressBar;
+    private  boolean onLoadPage;
     public WellnessSahakornFragment() {
         // Required empty public constructor
     }
@@ -46,13 +47,11 @@ public class WellnessSahakornFragment extends Fragment implements SwipeRefreshLa
         swipeContainer.setOnRefreshListener(this);
 
         //Mask: Progressbar
-        progressBar = (me.zhanghai.android.materialprogressbar.MaterialProgressBar)layout.findViewById(R.id.progress_bar_sahakron);
+        //progressBar = (me.zhanghai.android.materialprogressbar.MaterialProgressBar)layout.findViewById(R.id.progress_bar_sahakron);
 
         //Mask: WebView
         webView = (WebView)layout.findViewById(R.id.webWellnessSahakorn);
-        webView.getSettings().setJavaScriptEnabled(true);
-        webView.getViewTreeObserver().addOnScrollChangedListener(this);
-        webView.loadUrl(page_url);
+        startWebView(page_url);
         return layout;
 
     }
@@ -60,7 +59,56 @@ public class WellnessSahakornFragment extends Fragment implements SwipeRefreshLa
     public void onRefresh() {
         Log.d("debug","On Refresh");
         swipeContainer.setRefreshing(false);
-        loadWebView(page_url);
+        startWebView(page_url);
+    }
+    private void startWebView(String url){
+
+        onLoadPage = true;
+        webView.setWebViewClient(new WebViewClient(){
+
+            ProgressDialog progressDialog;
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                //Log.d("debug","On shouldOverrideUrlLoading ++++++");
+                view.loadUrl(url);
+                return true;
+            }
+
+            @Override
+            public void onLoadResource(WebView view, String url) {
+
+                if(!onLoadPage)
+                    return;
+                //Log.d("debug","On Load page...++++++");
+                if (progressDialog == null) {
+                    // in standard case YourActivity.this
+                    progressDialog = new ProgressDialog(getActivity());
+                    progressDialog.setMessage("Loading...");
+                    progressDialog.show();
+                }
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+
+                // Log.d("debug","Load page finish ++++++");
+                onLoadPage = false;
+                try{
+                    //Log.d("debug","Load page finish and hid diablog !!!!++++++");
+                    if (progressDialog.isShowing()) {
+                        progressDialog.dismiss();
+                        progressDialog = null;
+                    }
+                }catch(Exception exception){
+                    // Log.d("debug","Load page finish exception *********");
+                    exception.printStackTrace();
+                }
+            }
+        });
+
+        webView.getViewTreeObserver().addOnScrollChangedListener(this);
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(url);
     }
 
     @Override
@@ -71,39 +119,4 @@ public class WellnessSahakornFragment extends Fragment implements SwipeRefreshLa
             swipeContainer.setEnabled(false);
         }
     }
-
-
-    public void loadWebView(String url){
-
-        webView.loadUrl(page_url);
-        webView.setWebViewClient(new WebViewClient(){
-            @Override
-            public void onPageStarted(WebView view, String url, Bitmap favicon){
-                // Page loading started
-                //Log.d("debug","onPageStarted , url = " + url);
-                progressBar.setVisibility(View.VISIBLE);
-            }
-            @Override
-            public void onPageFinished(WebView view, String url){
-                // Page loading finished
-                //Log.d("debug","onPageFinished");
-                Toast.makeText(getActivity(),"Page Loaded.",Toast.LENGTH_SHORT).show();
-                progressBar.setShowProgressBackground(false);
-                progressBar.setVisibility(View.INVISIBLE);
-            }
-        });
-        webView.setWebChromeClient(new WebChromeClient(){
-
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-
-                //change your progress bar
-
-                int value = webView.getScrollY();
-               // Log.d("debug","onProgressChanged , y = " + String.valueOf(value));
-            }
-        });
-    }
-
-
 }

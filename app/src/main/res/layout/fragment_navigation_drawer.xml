@@ -12,7 +12,7 @@
         android:id="@+id/containerDrawer"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@drawable/logo2"
+        android:background="#1E88E5"
         android:scaleType="centerCrop"
         android:orientation="horizontal">
 
@@ -200,16 +200,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_centerVertical = "true"
-            android:src="@mipmap/ic_power_settings_new_black_48dp" />
+            android:layout_gravity="left|center"
+            android:src="@mipmap/ic_power_settings_new_black_24dp" />
 
 
         <Button
             android:id="@+id/btnLogout"
-            android:layout_marginLeft="0dp"
+            android:layout_marginLeft="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical = "true"
+            android:layout_gravity="left|center"
             android:text="LOGOUT"
             android:textAlignment="textStart"
             android:stateListAnimator="@null"

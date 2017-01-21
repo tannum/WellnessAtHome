@@ -101,16 +101,15 @@ public class CalendarFragment extends Fragment implements View.OnClickListener ,
                 bookingInfos.clear();
                 bookingAdapter.notifyDataSetChanged();
                 if((dom % 2) == 0){
-                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.doctor1,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.doctor2,"office1\noffice1","19/01/2017","12.00-18.00"));
                     bookingAdapter.notifyDataSetChanged();
 
                 }
                 else {
-                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-                    bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.doctor2,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.doctor1,"office1\noffice1","19/01/2017","12.00-18.00"));
+                    bookingInfos.add(new BookingInfo(R.drawable.doctor3,"office1\noffice1","19/01/2017","12.00-18.00"));
                     bookingAdapter.notifyDataSetChanged();
 
                 }
@@ -147,13 +146,9 @@ public class CalendarFragment extends Fragment implements View.OnClickListener ,
         }
 
         //Mask: Make Dummy officer available information.
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
-        bookingInfos.add(new BookingInfo(R.drawable.logo2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.doctor1,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.doctor2,"office1\noffice1","19/01/2017","12.00-18.00"));
+        bookingInfos.add(new BookingInfo(R.drawable.doctor3,"office1\noffice1","19/01/2017","12.00-18.00"));
 
         return view;
     }

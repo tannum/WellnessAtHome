@@ -32,69 +32,65 @@
                 app:civ_border_color="@color/colorWhiteSmoke"
                 app:civ_border_width="0dp" />
 
-
-            <TextView
-                android:id="@+id/txtBenefitHeader"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:text="Descriptions"
-                android:textSize="@dimen/header_content_font_size"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:maxLines="3" />
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/txtBenefitHeader"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Descriptions"
+                    android:textSize="@dimen/header_content_font_size"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:maxLines="3" />
+                <include layout="@layout/separator"/>
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:columnCount="5"
+                    android:rowCount="1">
+                    <ImageView
+                        android:layout_column="0"
+                        android:src="@mipmap/ic_redeem_black_24dp"
+                        android:layout_gravity="left|center" />
+                    <TextView
+                        android:id="@+id/txtBenefitTotal"
+                        android:layout_column="1"
+                        android:text="100"
+                        android:textColor="@color/colorInfo"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="16dp"/>
+                    <ImageView
+                        android:layout_column="2"
+                        android:src="@mipmap/ic_add_box_black_24dp"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="16dp"/>
+                    <TextView
+                        android:id="@+id/txtBenefitRest"
+                        android:layout_column="3"
+                        android:text="50"
+                        android:textColor="@color/colorSuccess"
+                        android:layout_gravity="left|center"
+                        android:layout_marginLeft="16dp"/>
+                    <Button
+                        android:id="@+id/btnViewBenefit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_column="4"
+                        android:background="@color/colorWhiteBackground"
+                        android:text="view..."
+                        android:textColor="@color/colorInfo"
+                        android:stateListAnimator="@null"/>
+
+                </GridLayout>
+            </LinearLayout>
+
         </LinearLayout>
-        <include layout="@layout/separator"/>
-        <TextView
-            android:id="@+id/txtBenefitContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Promotion content"
-            android:maxLines="5"/>
-        <include layout="@layout/separator"/>
-        <GridLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:columnCount="5"
-            android:rowCount="1">
-            <ImageView
-                android:layout_column="0"
-                android:src="@mipmap/ic_check_box_black_24dp"
-                android:layout_gravity="left|center" />
-            <TextView
-                android:id="@+id/txtBenefitTotal"
-                android:layout_column="1"
-                android:text="100"
-                android:textColor="@color/colorInfo"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="16dp"/>
-            <ImageView
-                android:layout_column="2"
-                android:src="@mipmap/ic_check_box_black_24dp"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="16dp"/>
-            <TextView
-                android:id="@+id/txtBenefitRest"
-                android:layout_column="3"
-                android:text="50"
-                android:textColor="@color/colorSuccess"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="16dp"/>
-            <Button
-                android:id="@+id/btnViewBenefit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_column="4"
-                android:background="@color/colorWhiteBackground"
-                android:text="view..."
-                android:textColor="@color/colorInfo"
-                android:stateListAnimator="@null"/>
 
-        </GridLayout>
-
-
-
+        <!--<include layout="@layout/separator"/>-->
 
     </LinearLayout>
 
