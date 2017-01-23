@@ -12,12 +12,11 @@
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <uses-feature android:name="android.hardware.location.gps" />
-    <uses-feature
-        android:glEsVersion="0x00020000"
-        android:required="true" />
-    <uses-feature
-        android:name="android.hardware.camera"
-        android:required="true" />
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+    <!--<uses-feature android:name="android.hardware.camera2" android:required="true"/>-->
+
+    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
         android:allowBackup="true"
