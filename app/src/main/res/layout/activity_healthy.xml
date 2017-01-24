@@ -14,17 +14,37 @@
         <!--android:scaleType="centerInside"-->
         <!--android:layout_alignParentTop="true"-->
         <!--android:layout_centerHorizontal="true"/>-->
-    <Button
-        android:id="@+id/camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TEST CAPTURE"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+    <!--<Button-->
+        <!--android:id="@+id/camera"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="TEST CAPTURE"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"/>-->
 
     <SurfaceView
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/graph"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/txtHeartRate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heart rate"
+            android:textSize="30dp"
+            android:background="@color/colorWhiteBackground"
+            android:textAlignment="center"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
