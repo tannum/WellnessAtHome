@@ -51,6 +51,7 @@ public class HeartRateActivity extends AppCompatActivity {
 
         for(int i = 0;i<xyValueArray.size();i++){
             double x = xyValueArray.get(i).getX();
+
             double y = xyValueArray.get(i).getY();
             xySeries.appendData(new DataPoint(x,y),true,1000);
         }
