@@ -38,6 +38,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -45,16 +46,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.Callback , Camera.PreviewCallback{
 
     static final int MY_PERMISSIONS_ACCESS_CAMERA = 0;
-    static final int REQUEST_IMAGE_CAPTURE = 1;
-    ImageView result;
-    Button button;
-    private Uri imageUri;
+
     private static final AtomicBoolean processing = new AtomicBoolean(false);
 
 
     private static int averageIndex = 0;
     private static final int averageArraySize = 4;
     private static final int[] averageArray = new int[averageArraySize];
+
+
+
 
     public static enum TYPE {
         GREEN, RED
@@ -72,15 +73,18 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
     private static double beats = 0;
     private static long startTime = 0;
 
+    private static int realTimeHeartbeatSize = 100;
+    private static final double[] realTimeHeartbeat = new double[realTimeHeartbeatSize];
+    private static int realTimeHeartbeatCount = 0;
 
+    LineGraphSeries series;
 
     TextView HeartReateView;
-
     Camera mCamera;
     SurfaceView mPreview;
     boolean saveState = false;
     GraphView graphView;
-    LineGraphSeries<DataPoint> series;
+    //LineGraphSeries<DataPoint> series;
 
 
 
@@ -93,26 +97,25 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         setContentView(R.layout.activity_healthy);
-
         CheckCameraPermission();
 
 
+        //Mask: Initial value to array
+        for(int i = 0;i<realTimeHeartbeatSize;i++) {
+           realTimeHeartbeat[i] = 255.0;
+        }
+
+        //Init GraphView
+        graphView = (GraphView)findViewById(R.id.graph);
+       // series = new LineGraphSeries<DataPoint>();
+
+        //Mask: Initial Surface View
         mPreview = (SurfaceView)findViewById(R.id.preview);
         mPreview.getHolder().addCallback(this);
         mPreview.getHolder().setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
+        //Mask: TestView
         HeartReateView = (TextView)findViewById(R.id.txtHeartRate);
-        graphView = (GraphView)findViewById(R.id.graph);
-
-        double y,x;
-        x = -5.0;
-        series = new LineGraphSeries<DataPoint>();
-        for(int i = 0;i<500;i++){
-            x = x + 0.5;
-            y = Math.sin(x);
-            series.appendData(new DataPoint(x,y),true,500);
-        }
-        graphView.addSeries(series);
 
     }
 
@@ -142,13 +145,27 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         }
     }
 
+    private void PlotLinearGraph(double[] yValue){
+
+
+        double[] xValue = new double[realTimeHeartbeatSize];
+        for(int i = 0;i<realTimeHeartbeatSize;i++)
+        {
+            xValue[i] = Double.valueOf(i);
+        }
+        graphView.removeAllSeries();
+        series = new LineGraphSeries<DataPoint>();
+        for(int i = 0;i<realTimeHeartbeatSize;i++){
+            series.appendData(new DataPoint(xValue[i],yValue[i]),true,500);
+        }
+        graphView.addSeries(series);
+
+
+
+    }
+
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-//        try{
-//            mCamera.setPreviewDisplay(mPreview.getHolder());
-//        }catch (Exception e){
-//            Log.d("debug",e.toString());
-//        }
     }
     private static Camera.Size getSmallestPreviewSize(int width, int height, Camera.Parameters parameters) {
         Camera.Size result = null;
@@ -178,6 +195,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         Camera.Size size = getSmallestPreviewSize(width,height,params);
         if(size != null){
             params.setPreviewSize(size.width, size.height);
+            //params.setPreviewSize(1,1);
         }
 
 
@@ -207,22 +225,6 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
 
     @Override
     public void onPreviewFrame(final byte[] data, Camera cam) {
-//        Log.d("debug","onPreviewFrame !!!!*******");
-//        if(bytes != null) {
-//            runOnUiThread(new Runnable() {
-//                Bitmap bitmap;
-//                int w = mCamera.getParameters().getPreviewSize().width;
-//                int h = mCamera.getParameters().getPreviewSize().height;
-//                int[] rgbs = new int[w * h];
-//                public void run() {
-//                    decodeYUV420(rgbs, bytes, w, h);
-//                    bitmap = Bitmap.createBitmap(rgbs, w, h, Bitmap.Config.ARGB_8888);
-//
-//                    // นำตัวแปร rgb หรือ bitmap ไปใช้งานได้ตามต้องการ
-//                    Log.d("debug","rgb = " + String.valueOf(rgbs.length));
-//                }
-//            });
-//        }
 
         if (data == null) throw new NullPointerException();
         Camera.Size size = cam.getParameters().getPreviewSize();
@@ -234,7 +236,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         int height = size.height;
 
         int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(), height, width);
-        // Log.i(TAG, "imgAvg="+imgAvg);
+         Log.d("debug", "********* imgAvg="+imgAvg);
         if (imgAvg == 0 || imgAvg == 255) {
             processing.set(false);
             return;
@@ -243,6 +245,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         int averageArrayAvg = 0;
         int averageArrayCnt = 0;
         for (int i = 0; i < averageArray.length; i++) {
+            Log.d("debug","averageArray["+String.valueOf(i)+"] = " + String.valueOf(averageArray[i]) );
             if (averageArray[i] > 0) {
                 averageArrayAvg += averageArray[i];
                 averageArrayCnt++;
@@ -250,12 +253,13 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         }
 
         int rollingAverage = (averageArrayCnt > 0) ? (averageArrayAvg / averageArrayCnt) : 0;
+        Log.d("debug","rollingAverage = " + rollingAverage);
         TYPE newType = currentType;
         if (imgAvg < rollingAverage) {
             newType = TYPE.RED;
             if (newType != currentType) {
                 beats++;
-                // Log.d(TAG, "BEAT!! beats="+beats);
+                 Log.d("debug", "BEAT!! beats="+beats);
             }
         } else if (imgAvg > rollingAverage) {
             newType = TYPE.GREEN;
@@ -264,6 +268,15 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         if (averageIndex == averageArraySize) averageIndex = 0;
         averageArray[averageIndex] = imgAvg;
         averageIndex++;
+
+
+        //Mask: Collect imgAvg
+        if(realTimeHeartbeatCount == realTimeHeartbeatSize){
+            realTimeHeartbeatCount = 0;
+        }
+        realTimeHeartbeat[realTimeHeartbeatCount] = Double.valueOf(rollingAverage);
+        realTimeHeartbeatCount++;
+        PlotLinearGraph(realTimeHeartbeat);
 
         // Transitioned from one state to another to the same
         if (newType != currentType) {
@@ -293,7 +306,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
             int beatsArrayAvg = 0;
             int beatsArrayCnt = 0;
 
-            Log.d("debug","array size = " + String.valueOf(beatsArray.length));
+           // Log.d("debug","array size = " + String.valueOf(beatsArray.length));
             for (int i = 0; i < beatsArray.length; i++) {
                 if (beatsArray[i] > 0) {
                     beatsArrayAvg += beatsArray[i];
@@ -314,31 +327,4 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
 
     }
 
-    public void decodeYUV420(int[] rgb, byte[] yuv420, int width, int height) {
-        final int frameSize = width * height;
-
-        for (int j = 0, yp = 0; j < height; j++) {
-            int uvp = frameSize + (j >> 1) * width, u = 0, v = 0;
-            for (int i = 0; i < width; i++, yp++) {
-                int y = (0xff & ((int) yuv420[yp])) - 16;
-                if (y < 0) y = 0;
-                if ((i & 1) == 0) {
-                    v = (0xff & yuv420[uvp++]) - 128;
-                    u = (0xff & yuv420[uvp++]) - 128;
-                }
-
-                int y1192 = 1192 * y;
-                int r = (y1192 + 1634 * v);
-                int g = (y1192 - 833 * v - 400 * u);
-                int b = (y1192 + 2066 * u);
-
-                if (r < 0) r = 0; else if (r > 262143) r = 262143;
-                if (g < 0) g = 0; else if (g > 262143) g = 262143;
-                if (b < 0) b = 0; else if (b > 262143) b = 262143;
-
-                rgb[yp] = 0xff000000 | ((r << 6) & 0xff0000) | ((g >> 2)
-                        & 0xff00) | ((b >> 10) & 0xff);
-            }
-        }
-    }
 }

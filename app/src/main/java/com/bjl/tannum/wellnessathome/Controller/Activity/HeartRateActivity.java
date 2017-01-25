@@ -7,10 +7,17 @@ import android.util.Log;
 
 import com.bjl.tannum.wellnessathome.Model.XYValue;
 import com.bjl.tannum.wellnessathome.R;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 import com.jjoe64.graphview.series.PointsGraphSeries;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -21,6 +28,7 @@ public class HeartRateActivity extends AppCompatActivity {
 
     GraphView mScatterPlot;
 
+    LineGraphSeries series;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +37,19 @@ public class HeartRateActivity extends AppCompatActivity {
 
         mScatterPlot = (GraphView)findViewById(R.id.scatter_graph);
 
-        createScatterPlot();
+        double y,x;
+        x = -5.0;
+
+        series = new LineGraphSeries<DataPoint>();
+        for(int i = 0;i<500;i++){
+            x = x + 0.1;
+            y = Math.sin(x);
+            series.appendData(new DataPoint(x,y),true,500);
+        }
+        mScatterPlot.addSeries(series);
+
+
+        //createScatterPlot();
     }
 
     private void createScatterPlot(){
