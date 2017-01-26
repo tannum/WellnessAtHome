@@ -107,7 +107,6 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         //Init GraphView
         graphView = (GraphView)findViewById(R.id.graph);
         graphView.getViewport().setMinY(220);
-
         graphView.getViewport().setMaxY(255);
         graphView.getViewport().setMinX(0);
         graphView.getViewport().setMaxX(50);
