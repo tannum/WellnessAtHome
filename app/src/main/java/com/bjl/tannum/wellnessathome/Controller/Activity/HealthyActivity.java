@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 //import android.graphics.Camera;
+import android.graphics.Color;
 import android.hardware.Camera;
 import android.net.Uri;
 import android.os.Environment;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 import com.bjl.tannum.wellnessathome.Controller.Library.ImageProcessing;
 import com.bjl.tannum.wellnessathome.R;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -72,7 +74,6 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
     private static final int[] beatsArray = new int[beatsArraySize];
     private static double beats = 0;
     private static long startTime = 0;
-
     private static int realTimeHeartbeatSize = 100;
     private static final double[] realTimeHeartbeat = new double[realTimeHeartbeatSize];
     private static int realTimeHeartbeatCount = 0;
@@ -107,7 +108,12 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
 
         //Init GraphView
         graphView = (GraphView)findViewById(R.id.graph);
-       // series = new LineGraphSeries<DataPoint>();
+        graphView.getViewport().setMinY(220);
+        graphView.getViewport().setMaxY(255);
+        graphView.getViewport().setYAxisBoundsManual(true);
+//        graphView.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+//        graphView.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+//        graphView.getGridLabelRenderer().setVerticalLabelsVisible(false);
 
         //Mask: Initial Surface View
         mPreview = (SurfaceView)findViewById(R.id.preview);
@@ -155,6 +161,19 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         }
         graphView.removeAllSeries();
         series = new LineGraphSeries<DataPoint>();
+
+
+        // styling series
+        series.setTitle("Random Curve 1");
+        series.setColor(Color.DKGRAY);
+        //series.setDrawDataPoints(true);
+        series.setDataPointsRadius(10);
+        series.setThickness(8);
+
+
+
+
+
         for(int i = 0;i<realTimeHeartbeatSize;i++){
             series.appendData(new DataPoint(xValue[i],yValue[i]),true,500);
         }
@@ -277,6 +296,12 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         realTimeHeartbeat[realTimeHeartbeatCount] = Double.valueOf(rollingAverage);
         realTimeHeartbeatCount++;
         PlotLinearGraph(realTimeHeartbeat);
+
+
+
+
+
+
 
         // Transitioned from one state to another to the same
         if (newType != currentType) {
