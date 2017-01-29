@@ -5,63 +5,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.MainActivity">
 
-    <item android:title="website">
-        <menu>
-            <group android:checkableBehavior="none">
-                <item android:id="@+id/action_wellness_home"
-                    android:title="wellness home"
-                    android:icon="@mipmap/ic_public_black_24dp"/>
 
-                <item android:id="@+id/action_wellness_city"
-                    android:title="wellness city"
-                    android:icon="@mipmap/ic_public_black_24dp"/>
+        <item android:title="wellness group">
+            <menu>
+                <group android:checkableBehavior="none">
+                    <item android:id="@+id/action_wellness_home"
+                        android:title="wellness home"
+                        android:icon="@mipmap/ic_public_black_24dp"/>
 
-                <item android:id="@+id/action_wellness_resort"
-                    android:title="wellness resort"
-                    android:icon="@mipmap/ic_public_black_24dp"/>
+                    <item android:id="@+id/action_wellness_city"
+                        android:title="wellness city"
+                        android:icon="@mipmap/ic_public_black_24dp"/>
 
-                <item android:id="@+id/action_wellness_sahakron"
-                    android:title="wellness sahakron"
-                    android:icon="@mipmap/ic_public_black_24dp"/>
-            </group>
-        </menu>
-    </item>
+                    <item android:id="@+id/action_wellness_resort"
+                        android:title="wellness resort"
+                        android:icon="@mipmap/ic_public_black_24dp"/>
 
-    <item
-        android:id="@+id/action_promotion"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="Promotion"
-        android:icon="@mipmap/ic_home_black_24dp"/>
-    <item
-        android:id="@+id/action_location"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="Location"/>
-    <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="Logout"/>
+                    <item android:id="@+id/action_wellness_sahakron"
+                        android:title="wellness sahakron"
+                        android:icon="@mipmap/ic_public_black_24dp"/>
+                </group>
+            </menu>
+        </item>
 
-    <item
-        android:id="@+id/action_home"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:icon="@mipmap/ic_home_black_24dp"
-        android:title="Home"/>
-    <item
-        android:id="@+id/action_emergency"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:icon="@mipmap/ic_phone_in_talk_black_24dp"
-        android:title="Home"/>
-    <item
-        android:id="@+id/action_appointment"
-        android:orderInCategory="100"
-        app:showAsAction="always"
-        android:icon="@mipmap/ic_event_note_black_24dp"
-        android:title="Home"/>
+
+
+        <item
+            android:id="@+id/action_healthcare_service"
+            android:title="healthcare service"
+            android:icon="@mipmap/ic_local_hospital_black_24dp"
+            app:showAsAction="never"/>
+
+        <item
+            android:id="@+id/action_promotion"
+            app:showAsAction="never"
+            android:title="Promotion"
+            android:icon="@mipmap/ic_home_black_24dp"/>
+        <item
+            android:id="@+id/action_event"
+            android:title="event"
+            android:icon="@mipmap/ic_event_note_black_24dp"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/action_health_articles"
+            android:title="health articles"
+            android:icon="@mipmap/ic_event_note_black_24dp"
+            app:showAsAction="never"/>
+        <item
+            android:id="@+id/action_location"
+            app:showAsAction="always"
+            android:icon="@mipmap/ic_location_on_black_24dp"
+            android:title="Location"/>
+        <item
+            android:id="@+id/action_emergency"
+            app:showAsAction="always"
+            android:icon="@mipmap/ic_phone_in_talk_black_24dp"
+            android:title="emergency"/>
+
+        <item
+            android:id="@+id/action_appointment"
+            app:showAsAction="always"
+            android:icon="@mipmap/ic_event_note_black_24dp"
+            android:title="appointment"/>
+
+        <item
+            android:id="@+id/action_logout"
+            android:orderInCategory="100"
+            app:showAsAction="never"
+            android:title="Logout"/>
+
 
 </menu>
 

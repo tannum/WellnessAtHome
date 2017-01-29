@@ -1,7 +1,9 @@
 package com.bjl.tannum.wellnessathome.Controller.Activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
@@ -22,6 +24,7 @@ import com.bjl.tannum.wellnessathome.Controller.Fragment.NavigationDrawerFragmen
 import com.bjl.tannum.wellnessathome.Controller.Library.GPSTracker;
 import com.bjl.tannum.wellnessathome.Model.BenefitInfo;
 import com.bjl.tannum.wellnessathome.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,11 +38,17 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
     private Toolbar toolbar;
     final  int MY_PERMISSIONS_ACCESS_LOCATION = 0;
     final  int MY_PERMISSIONS_CALL_PHONE = 1;
+    String userId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_benefit);
+
+
+        //Mask: Get user id form SharePreferences
+        userId = getSharedPreferences("USER",MODE_PRIVATE).getString("user_id","");
 
         //Mask: setup tool bar
         toolbar = (Toolbar)findViewById(R.id.app_bar);
@@ -121,8 +130,6 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
         int item_id = item.getItemId();
         Log.d("debug","item id = " + String.valueOf(item_id));
         switch (item_id){
-            case R.id.action_home:
-                break;
             case R.id.action_emergency:
                 dialContactPhone("035249500");
                 break;
@@ -135,8 +142,15 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
             case R.id.action_location:
                 startActivity(new Intent(BenefitActivity.this,LocationActivity.class));
                 break;
+            case R.id.action_healthcare_service:
+                break;
+            case R.id.action_event:
+                break;
+            case R.id.action_health_articles:
+                break;
             case R.id.action_logout:
                 startActivity(new Intent(this,LoginActivity.class));
+                FirebaseAuth.getInstance().signOut();
                 finish();
                 break;
             case R.id.action_wellness_home:

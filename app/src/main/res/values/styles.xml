@@ -23,5 +23,10 @@
         <item name="windowActionBarOverlay">true</item>
     </style>
 
-
+    <style name="popup" parent="Widget.AppCompat.ListView.DropDown">
+        <item name="android:divider">@color/colorPrimary</item>
+        <item name="android:dividerHeight">1dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:itemBackground">@android:color/white</item>
+    </style>
 </resources>

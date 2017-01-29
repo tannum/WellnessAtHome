@@ -50,8 +50,6 @@ public class PromotionAdapter extends RecyclerView.Adapter<PromotionAdapter.Prom
         holder.thumbnail.setImageResource(info.getThumbnailId());
         holder.txtPromotionHeader.setText(info.getHeader());
         holder.txtPromotionContent.setText(info.getContent());
-
-
     }
 
     @Override

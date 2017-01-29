@@ -26,6 +26,7 @@ import com.bjl.tannum.wellnessathome.Controller.Activity.MainActivity;
 import com.bjl.tannum.wellnessathome.Controller.Adapter.NavRecyclerviewAdapter;
 import com.bjl.tannum.wellnessathome.Model.navItemInfo;
 import com.bjl.tannum.wellnessathome.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,6 +111,7 @@ public class NavigationDrawerFragment extends Fragment implements View.OnClickLi
                 Log.d("debug","Logout button clicked");
                 mDrawerLayout.closeDrawers();
                 Intent intent = new Intent(getContext(), LoginActivity.class);
+                FirebaseAuth.getInstance().signOut();
                 startActivity(intent);
                 getActivity().finish();
                 break;

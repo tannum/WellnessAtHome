@@ -261,7 +261,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         int height = size.height;
 
         int imgAvg = ImageProcessing.decodeYUV420SPtoRedAvg(data.clone(), height, width);
-         Log.d("debug", "********* imgAvg="+imgAvg);
+         //Log.d("debug", "********* imgAvg="+imgAvg);
         if (imgAvg == 0 || imgAvg == 255) {
             processing.set(false);
             return;
@@ -270,7 +270,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         int averageArrayAvg = 0;
         int averageArrayCnt = 0;
         for (int i = 0; i < averageArray.length; i++) {
-            Log.d("debug","averageArray["+String.valueOf(i)+"] = " + String.valueOf(averageArray[i]) );
+            //Log.d("debug","averageArray["+String.valueOf(i)+"] = " + String.valueOf(averageArray[i]) );
             if (averageArray[i] > 0) {
                 averageArrayAvg += averageArray[i];
                 averageArrayCnt++;
@@ -278,7 +278,7 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         }
 
         int rollingAverage = (averageArrayCnt > 0) ? (averageArrayAvg / averageArrayCnt) : 0;
-        Log.d("debug","rollingAverage = " + rollingAverage);
+        //Log.d("debug","rollingAverage = " + rollingAverage);
         TYPE newType = currentType;
         if (imgAvg < rollingAverage) {
             newType = TYPE.RED;
@@ -295,18 +295,6 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
         averageIndex++;
 
 
-//        //Mask: Collect imgAvg
-//        if(realTimeHeartbeatCount == realTimeHeartbeatSize){
-//            realTimeHeartbeatCount = 0;
-//        }
-//        realTimeHeartbeat[realTimeHeartbeatCount] = Double.valueOf(rollingAverage);
-//        realTimeHeartbeatCount++;
-//        PlotLinearGraph(realTimeHeartbeat);
-
-//        double[] bb = shiftLeft(realTimeHeartbeat,1);
-//        bb[99]=  Double.valueOf(rollingAverage);
-//        System.arraycopy(realTimeHeartbeat,0,bb,0,100);
-//        PlotLinearGraph(bb);
 
         double[] temp = new double[realTimeHeartbeatSize];
         System.arraycopy(realTimeHeartbeat,1,temp,0,realTimeHeartbeatSize-1);
@@ -352,11 +340,10 @@ public class HealthyActivity extends AppCompatActivity implements SurfaceHolder.
                 }
             }
             //Mask: Calculate average value
-
             int beatsAvg = (beatsArrayAvg / beatsArrayCnt);
             //text.setText(String.valueOf(beatsAvg));
             HeartReateView.setText(String.valueOf(beatsAvg));
-            Log.d("debug","HardReate = " + String.valueOf(beatsAvg));
+            //Log.d("debug","HardReate = " + String.valueOf(beatsAvg));
             startTime = System.currentTimeMillis();
             beats = 0;
         }

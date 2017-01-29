@@ -1,84 +1,217 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_sign_up"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.SignUpActivity">
-
-
-    <com.mikhaellopez.circularimageview.CircularImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/register_pic"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/no_pic1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:civ_border_color="@color/colorWhiteSmoke"
-        app:civ_border_width="0dp"/>
-
-
-    <EditText
-        android:id="@+id/register_id"
-        android:inputType="number"
-        android:maxLength="13"
-        android:textSize="@dimen/normal_font_size"
+    android:layout_height="match_parent">
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/activity_sign_up"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register_pic"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="Your ID"
-        android:textColorHint="@color/colorHint"/>
-    <EditText
-        android:id="@+id/register_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register_id"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:textSize="@dimen/normal_font_size"
-        android:hint="Your Name"
-        android:textColorHint="@color/colorHint" />
-    <EditText
-        android:id="@+id/register_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register_name"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:textSize="@dimen/normal_font_size"
-        android:hint="Your Email"
-        android:textColorHint="@color/colorHint" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorWhiteBackground"
+        tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.SignUpActivity">
 
-    <EditText
-        android:id="@+id/register_password"
-        android:inputType="numberPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/register_email"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:textSize="@dimen/normal_font_size"
-        android:hint="Your Password"
-        android:textColorHint="@color/colorHint" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorInfo"
-        android:textSize="@dimen/normal_font_size"
-        android:text="REGISTER"
-        android:textColor="@color/colorWhiteBackground"/>
-</RelativeLayout>
+            <Button
+                android:id="@+id/btnProfileRegisterCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:layout_weight="1"
+                android:background="@color/colorWhiteBackground"
+                android:stateListAnimator="@null"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhiteBackground"
+                android:gravity="center"
+                android:text="Profile"
+                android:textSize="@dimen/header_font_size"
+                android:layout_weight="98"/>
+            <Button
+                android:id="@+id/btnProfileRegisterDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWhiteBackground"
+                android:stateListAnimator="@null"
+                android:layout_weight="1"
+                android:text="Done" />
+        </LinearLayout>
+        <include layout="@layout/separator"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="#E0E0E0">
+            <com.mikhaellopez.circularimageview.CircularImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/register_pic"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/no_pic1"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_centerHorizontal="true"
+                app:civ_border_color="@color/colorWhiteSmoke"
+                app:civ_border_width="0dp"/>
+            <Button
+                android:id="@+id/btnChoose_profile_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Choose your photo"
+                android:textColor="#0277BD"
+                android:background="#E0E0E0"
+                android:stateListAnimator="@null"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_event_note_black_24dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:id="@+id/editProfileName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:hint="Name"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_person_black_24dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:id="@+id/editProfileUserName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:maxLines="1"
+                android:hint="Username"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_wc_black_24dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:id="@+id/editProfileBio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusableInTouchMode="false"
+                android:hint="Bio"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#E0E0E0"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PRIVATE INFORMATION"
+                android:paddingLeft="@dimen/activity_horizontal_margin"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_email_black_24dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:id="@+id/editProfileEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:hint="Email"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_no_encryption_black_24dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:id="@+id/editProfilePassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="left|center"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_stay_current_portrait_black_24dp"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"/>
+            <EditText
+                android:id="@+id/editTextTel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:hint="Telephone number"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
+

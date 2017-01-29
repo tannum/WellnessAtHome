@@ -55,8 +55,6 @@ public class MainActivity extends AppCompatActivity {
         int item_id = item.getItemId();
         Log.d("debug","item id = " + String.valueOf(item_id));
         switch (item_id){
-            case R.id.action_home:
-                break;
             case R.id.action_emergency:
                 break;
             case R.id.action_appointment:
