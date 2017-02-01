@@ -1,9 +1,12 @@
 package com.bjl.tannum.wellnessathome.Model;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by tannum on 1/28/2017 AD.
  */
 
+@IgnoreExtraProperties
 public class RegisterInfo {
 
     String name;
@@ -11,7 +14,6 @@ public class RegisterInfo {
     String bio;
     String email;
     String tel;
-
 
     public RegisterInfo() {
     }

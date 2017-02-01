@@ -5,25 +5,100 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhiteBackground"
     tools:context="com.bjl.tannum.wellnessathome.Controller.Activity.HealthyActivity">
 
-
-    <SurfaceView
-        android:id="@+id/preview"
-        android:layout_width="1dp"
-        android:layout_height="1dp" />
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph"
-        android:layout_width="match_parent"
-        android:layout_height="400dp" />
-
-    <TextView
-        android:id="@+id/txtHeartRate"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Heart rate"
-        android:textSize="30dp"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/heartrate1"
+            android:scaleType="centerCrop"/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Heart Rate"-->
+            <!--android:textSize="@dimen/header_font_size"-->
+            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"/>-->
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Heart Rate"
+            android:textColor="#757575"
+            android:gravity="left|center"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@color/colorWhiteBackground"
+            android:stateListAnimator="@null"/>
+    </LinearLayout>
+    <include layout="@layout/separator"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_vertical_margin"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/sleep_well1"
+            android:scaleType="centerCrop"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sleep Tracker and Alarm"
+            android:textColor="#757575"
+            android:gravity="left|center"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:background="@color/colorWhiteBackground"
+            android:stateListAnimator="@null"/>
+        <!--<TextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Sleep Tracker and Alarm"-->
+            <!--android:textSize="@dimen/header_font_size"-->
+            <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"/>-->
+
+    </LinearLayout>
+    <include layout="@layout/separator"/>
+    x    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/activity_vertical_margin"
+    android:orientation="horizontal"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:src="@drawable/oxygen"
+        android:scaleType="centerCrop"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Blood Oxygen"
+        android:textColor="#757575"
+        android:gravity="left|center"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:background="@color/colorWhiteBackground"
-        android:textAlignment="center"/>
+        android:stateListAnimator="@null"/>
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Blood Oxygen"-->
+        <!--android:textSize="@dimen/header_font_size"-->
+        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"/>-->
+
+</LinearLayout>
+    <include layout="@layout/separator"/>
 
 </LinearLayout>

@@ -10,6 +10,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,14 @@ import com.bjl.tannum.wellnessathome.Controller.Adapter.ListAdapter;
 import com.bjl.tannum.wellnessathome.Controller.Library.HelperFunc;
 import com.bjl.tannum.wellnessathome.Model.RegisterInfo;
 import com.bjl.tannum.wellnessathome.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnItemClickListener;
@@ -41,7 +50,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener{
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener {
 
 
 
@@ -61,6 +70,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private Button btnDone;
     private Button btnChoosePhoto;
 
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +83,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         username = (EditText)findViewById(R.id.editProfileUserName);
         bio = (EditText)findViewById(R.id.editProfileBio);
         email = (EditText)findViewById(R.id.editProfileEmail);
-        password = (EditText)findViewById(R.id.editTextPassword);
+        password = (EditText)findViewById(R.id.editProfilePassword);
         tel = (EditText)findViewById(R.id.editTextTel);
         btnCancel = (Button)findViewById(R.id.btnProfileRegisterCancel);
         btnDone = (Button)findViewById(R.id.btnProfileRegisterDone);
@@ -90,7 +102,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.CAMERA},MY_PERMISSIONS_ACCESS_CAMERA);
         }
 
-        //HelperFunc.hideSoftKeyboard(this);
+        //Mask: Initial Firebase auth
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+
+
+        //Mask: Input demo informatin
+        name.setText("user2");
+        username.setText("Username_user2");
+        bio.setText("Male");
+        tel.setText("1111111111");
+        email.setText("user2@hotmail.com");
+        password.setText("123456");
+
 
     }
 
@@ -108,14 +132,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             choseGenderHandler();
         }
         else if(id == R.id.btnProfileRegisterDone){
-            if(checkRegisterProfile() == true){
+            RegisterProfileHandler();
+            //finish();
 
-            }
-            else
-            {
-                Toast.makeText(this,"Register Information Error!!!",Toast.LENGTH_LONG).show();
-            }
-            finish();
         }
         else if(id == R.id.btnProfileRegisterCancel){
             finish();
@@ -127,13 +146,66 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    private void RegisterProfileHandler(){
+
+        //Mask: Check Infomation
+        if(TextUtils.isEmpty(name.getText().toString()) ||
+                TextUtils.isEmpty(username.getText().toString()) ||
+                TextUtils.isEmpty(bio.getText().toString())||
+                TextUtils.isEmpty(email.getText().toString())||
+                TextUtils.isEmpty(password.getText().toString())||
+                TextUtils.isEmpty(tel.getText().toString())){
+            //Toast.makeText(this,"Register Information Error!!!",Toast.LENGTH_LONG).show();
+            Log.d("debug","Register Information Error!!!");
+            return;
+        }
+        //Mask: Register user by email.
+        mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+               if(task.isSuccessful()){
+                   Log.d("debug","Register Auth Success " + task.getResult().toString());
+                   //Toast.makeText(SignUpActivity.this,"Register auth success",Toast.LENGTH_LONG).show();
+
+//                   //Mask: Update user information to database
+//                   FirebaseUser user = task.getResult().getUser();
+//                   RegisterInfo info = new RegisterInfo(bio.getText().toString(),
+//                           email.getText().toString(),
+//                           name.getText().toString(),
+//                           tel.getText().toString(),
+//                           username.getText().toString());
+//                   mDatabaseRef.child("users").child(user.getUid()).setValue(info);
+               }
+               else
+               {
+                   //Toast.makeText(SignUpActivity.this,"Register auth Error",Toast.LENGTH_LONG).show();
+                  // Log.d("debug","Register Auth Error2 " + task.getResult().toString());
+               }
+            }
+        })
+        .addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("debug","Register Auth Error1" + e.getLocalizedMessage());
+            }
+        });
+
+
+
+
+
+
+    }
+
+
     private boolean checkRegisterProfile(){
-        if(TextUtils.isEmpty(name.getText()) ||
-                TextUtils.isEmpty(username.getText()) ||
-                TextUtils.isEmpty(bio.getText())||
-                TextUtils.isEmpty(email.getText())||
-                TextUtils.isEmpty(password.getText())||
-                TextUtils.isEmpty(tel.getText())){
+        if(TextUtils.isEmpty(name.getText().toString()) ||
+                TextUtils.isEmpty(username.getText().toString()) ||
+                TextUtils.isEmpty(bio.getText().toString())||
+                TextUtils.isEmpty(email.getText().toString())||
+                TextUtils.isEmpty(password.getText().toString())||
+                TextUtils.isEmpty(tel.getText().toString())){
 
             return false;
         }
@@ -271,4 +343,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
         return super.onKeyDown(keyCode, event);
     }
+
+
 }
+
