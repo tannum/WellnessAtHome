@@ -9,11 +9,11 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class RegisterInfo {
 
-    String name;
-    String username;
-    String bio;
-    String email;
-    String tel;
+    public String name;
+    public String username;
+    public String bio;
+    public String email;
+    public String tel;
 
     public RegisterInfo() {
     }

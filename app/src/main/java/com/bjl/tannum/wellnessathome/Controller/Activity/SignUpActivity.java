@@ -3,10 +3,13 @@ package com.bjl.tannum.wellnessathome.Controller.Activity;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
@@ -29,26 +32,36 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bjl.tannum.wellnessathome.Controller.Adapter.ListAdapter;
+import com.bjl.tannum.wellnessathome.Controller.Library.AlertDialog;
 import com.bjl.tannum.wellnessathome.Controller.Library.HelperFunc;
 import com.bjl.tannum.wellnessathome.Model.RegisterInfo;
+import com.bjl.tannum.wellnessathome.Model.UserInfo;
 import com.bjl.tannum.wellnessathome.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnItemClickListener;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener {
 
@@ -72,6 +85,10 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabaseRef;
+    private StorageReference mStorageRef;
+    SweetAlertDialog pDialog;
+    SharedPreferences.Editor preferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +106,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         btnDone = (Button)findViewById(R.id.btnProfileRegisterDone);
         btnChoosePhoto = (Button)findViewById(R.id.btnChoose_profile_photo);
 
+        //Mask: Initial SharedPreferences
+        preferences = getSharedPreferences("USER",MODE_PRIVATE).edit();
+
         //Mask: add event listener
         btnCancel.setOnClickListener(this);
         btnDone.setOnClickListener(this);
@@ -105,6 +125,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         //Mask: Initial Firebase auth
         mAuth = FirebaseAuth.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference();
+        mStorageRef  = FirebaseStorage.getInstance().getReference();
+
+        //Mask: Initial progress dialog.
+        pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
+        pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+        pDialog.setTitleText("Loading");
+        pDialog.setCancelable(false);
 
 
         //Mask: Input demo informatin
@@ -117,6 +144,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
 
     }
+
+
 
     @Override
     public void onClick(View v) {
@@ -141,46 +170,76 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
-    private void RegisterProfileHandler(RegisterInfo info){
-
-    }
-
+    final float progress = 0;
     private void RegisterProfileHandler(){
 
-        //Mask: Check Infomation
+        //Mask: Check Information
         if(TextUtils.isEmpty(name.getText().toString()) ||
                 TextUtils.isEmpty(username.getText().toString()) ||
                 TextUtils.isEmpty(bio.getText().toString())||
                 TextUtils.isEmpty(email.getText().toString())||
                 TextUtils.isEmpty(password.getText().toString())||
                 TextUtils.isEmpty(tel.getText().toString())){
-            //Toast.makeText(this,"Register Information Error!!!",Toast.LENGTH_LONG).show();
             Log.d("debug","Register Information Error!!!");
             return;
         }
+
+        //Mask: set waiting dialog.
+        pDialog.show();
+
         //Mask: Register user by email.
-        mAuth.signInWithEmailAndPassword(email.getText().toString(),password.getText().toString())
+        mAuth.createUserWithEmailAndPassword(email.getText().toString(),password.getText().toString())
         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                if(task.isSuccessful()){
                    Log.d("debug","Register Auth Success " + task.getResult().toString());
-                   //Toast.makeText(SignUpActivity.this,"Register auth success",Toast.LENGTH_LONG).show();
 
-//                   //Mask: Update user information to database
-//                   FirebaseUser user = task.getResult().getUser();
-//                   RegisterInfo info = new RegisterInfo(bio.getText().toString(),
-//                           email.getText().toString(),
-//                           name.getText().toString(),
-//                           tel.getText().toString(),
-//                           username.getText().toString());
-//                   mDatabaseRef.child("users").child(user.getUid()).setValue(info);
-               }
-               else
-               {
-                   //Toast.makeText(SignUpActivity.this,"Register auth Error",Toast.LENGTH_LONG).show();
-                  // Log.d("debug","Register Auth Error2 " + task.getResult().toString());
+                   //Mask: Update user information to database
+                   final FirebaseUser user = task.getResult().getUser();
+                   RegisterInfo info = new RegisterInfo(bio.getText().toString(),
+                           email.getText().toString(),
+                           name.getText().toString(),
+                           tel.getText().toString(),
+                           username.getText().toString());
+                   mDatabaseRef.child("users").child(user.getUid()).setValue(info);
+
+                   //Mask: Update picture
+                   Bitmap bitmap = ((BitmapDrawable)registerImg.getDrawable()).getBitmap();
+                   ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                   bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                   UploadTask uploadTask = mStorageRef.child("user/" + user.getUid()).putBytes(baos.toByteArray());
+                   uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                       @Override
+                       public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            Log.d("debug","upload profile picture success");
+                           pDialog.dismiss();
+                           AlertDialog.ShowSuccessDialog(SignUpActivity.this);
+
+                           //Mask: Save User ID and go to main activity
+                           preferences.putString("user_id",user.getUid());
+                           preferences.commit();
+                           startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
+                       }
+                   }).addOnFailureListener(new OnFailureListener() {
+                       @Override
+                       public void onFailure(@NonNull Exception e) {
+                           Log.d("debug","upload profile picture error");
+                           pDialog.dismiss();
+                           AlertDialog.ShowErrorDialog(SignUpActivity.this);
+
+                           //Mask: Save User ID and go to main activity
+                           preferences.putString("user_id",user.getUid());
+                           preferences.commit();
+                           startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
+                       }
+                   }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                       @Override
+                       public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                           Log.d("debug","prograss change .. ");
+                           pDialog.getProgressHelper().setProgress(progress + 1);
+                       }
+                   });
                }
             }
         })
@@ -188,15 +247,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             @Override
             public void onFailure(@NonNull Exception e) {
                 Log.d("debug","Register Auth Error1" + e.getLocalizedMessage());
+                pDialog.dismiss();
+                AlertDialog.ShowErrorDialog(SignUpActivity.this);
             }
         });
-
-
-
-
-
-
     }
+
+
 
 
     private boolean checkRegisterProfile(){
