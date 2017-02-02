@@ -236,7 +236,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                        @Override
                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                           Log.d("debug","prograss change .. ");
+                           Log.d("debug","progress change .. ");
                            pDialog.getProgressHelper().setProgress(progress + 1);
                        }
                    });
