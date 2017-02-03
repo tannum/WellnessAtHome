@@ -63,7 +63,7 @@ import java.util.List;
 
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
-public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener {
+public class SignUpActivity extends AppCompatActivity implements View.OnClickListener, OnItemClickListener  {
 
 
 
@@ -214,24 +214,34 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Log.d("debug","upload profile picture success");
                            pDialog.dismiss();
-                           AlertDialog.ShowSuccessDialog(SignUpActivity.this);
+                           AlertDialog.ShowSuccessDialog(SignUpActivity.this, new AlertDialog.OnDialogConfirmListener() {
+                               @Override
+                               public void onDialogConfirm() {
+                                   //Mask: Save User ID and go to main activity
+                                   preferences.putString("user_id",user.getUid());
+                                   preferences.commit();
+                                   startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
+                               }
+                           });
 
-                           //Mask: Save User ID and go to main activity
-                           preferences.putString("user_id",user.getUid());
-                           preferences.commit();
-                           startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
+
                        }
                    }).addOnFailureListener(new OnFailureListener() {
                        @Override
                        public void onFailure(@NonNull Exception e) {
                            Log.d("debug","upload profile picture error");
                            pDialog.dismiss();
-                           AlertDialog.ShowErrorDialog(SignUpActivity.this);
+                           AlertDialog.ShowWaringDialog(SignUpActivity.this, new AlertDialog.OnDialogConfirmListener() {
+                               @Override
+                               public void onDialogConfirm() {
+                                   //Mask: Save User ID and go to main activity
+                                   preferences.putString("user_id",user.getUid());
+                                   preferences.commit();
+                                   startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
+                               }
+                           });
 
-                           //Mask: Save User ID and go to main activity
-                           preferences.putString("user_id",user.getUid());
-                           preferences.commit();
-                           startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
+
                        }
                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                        @Override
