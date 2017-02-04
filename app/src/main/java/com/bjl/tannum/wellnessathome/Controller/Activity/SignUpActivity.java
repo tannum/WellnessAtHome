@@ -223,8 +223,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                    startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
                                }
                            });
-
-
                        }
                    }).addOnFailureListener(new OnFailureListener() {
                        @Override
@@ -247,8 +245,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                    startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
                                }
                            });
-
-
                        }
                    }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                        @Override
@@ -269,9 +265,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             }
         });
     }
-
-
-
 
     private boolean checkRegisterProfile(){
         if(TextUtils.isEmpty(name.getText().toString()) ||
