@@ -49,6 +49,7 @@ public class BenefitActivity extends AppCompatActivity implements BenefitsAdapte
 
         //Mask: Get user id form SharePreferences
         userId = getSharedPreferences("USER",MODE_PRIVATE).getString("user_id","");
+        Log.d("debug","Main page , userId : " + userId);
 
         //Mask: setup tool bar
         toolbar = (Toolbar)findViewById(R.id.app_bar);

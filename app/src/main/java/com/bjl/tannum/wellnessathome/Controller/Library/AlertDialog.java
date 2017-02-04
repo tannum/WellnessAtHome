@@ -17,10 +17,10 @@ public class AlertDialog {
     }
 
 
-    public static void ShowSuccessDialog(Context context){
+    public static void ShowSuccessDialog(Context context,String title,String content){
         final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Good job!")
-                .setContentText("You clicked the button!")
+                .setTitleText(title)
+                .setContentText(content)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -29,10 +29,10 @@ public class AlertDialog {
                 });
         pDialog.show();
     }
-    public static void ShowSuccessDialog(Context context ,final OnDialogConfirmListener listener){
+    public static void ShowSuccessDialog(Context context ,String title,String content,final OnDialogConfirmListener listener){
         final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE)
-                .setTitleText("Good job!")
-                .setContentText("You clicked the button!")
+                .setTitleText(title)
+                .setContentText(content)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -47,11 +47,11 @@ public class AlertDialog {
 
 
 
-    public static void ShowWaringDialog(Context context,final OnDialogConfirmListener listener){
+    public static void ShowWaringDialog(Context context,String title,String content,String confirm_text,final OnDialogConfirmListener listener){
         final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Are you sure?")
-                .setContentText("Won't be able to recover this file!")
-                .setConfirmText("Yes,delete it!")
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText(confirm_text)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -65,11 +65,11 @@ public class AlertDialog {
         pDialog.show();
     }
 
-    public static void ShowWaringDialog(Context context){
+    public static void ShowWaringDialog(Context context ,String title,String content,String confirm_text){
         final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.WARNING_TYPE)
-                .setTitleText("Are you sure?")
-                .setContentText("Won't be able to recover this file!")
-                .setConfirmText("Yes,delete it!")
+                .setTitleText(title)
+                .setContentText(content)
+                .setConfirmText(confirm_text)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -80,10 +80,10 @@ public class AlertDialog {
     }
 
 
-    public static void ShowErrorDialog(Context context){
+    public static void ShowErrorDialog(Context context,String title,String content){
         final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("Oops...")
-                .setContentText("Something went wrong!")
+                .setTitleText(title)
+                .setContentText(content)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {
@@ -93,10 +93,10 @@ public class AlertDialog {
         pDialog.show();
     }
 
-    public static void ShowErrorDialog(Context context,final OnDialogConfirmListener listener ){
+    public static void ShowErrorDialog(Context context,String title,String content,final OnDialogConfirmListener listener ){
         final SweetAlertDialog pDialog = new SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE)
-                .setTitleText("Oops...")
-                .setContentText("Something went wrong!")
+                .setTitleText(title)
+                .setContentText(content)
                 .setConfirmClickListener(new SweetAlertDialog.OnSweetClickListener() {
                     @Override
                     public void onClick(SweetAlertDialog sweetAlertDialog) {

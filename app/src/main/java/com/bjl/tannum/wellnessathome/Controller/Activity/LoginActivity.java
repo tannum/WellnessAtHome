@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.bjl.tannum.wellnessathome.Controller.Database.DatabaseHelper;
+import com.bjl.tannum.wellnessathome.Controller.Library.AlertDialog;
 import com.bjl.tannum.wellnessathome.Model.UserInfo;
 import com.bjl.tannum.wellnessathome.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -128,7 +129,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         String password = editTextPassword.getText().toString();
 
         if(TextUtils.isEmpty(email) || (TextUtils.isEmpty(password))){
-            Toast.makeText(LoginActivity.this,"Fields are empty",Toast.LENGTH_LONG).show();
+            AlertDialog.ShowErrorDialog(LoginActivity.this,"Login Error","Fields are empty");
             return;
         }
 
@@ -136,11 +137,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+
                     //Mask: Signed in complete and save USER ID
                     FirebaseUser user = task.getResult().getUser();
                     preferences.putString("user_id",user.getUid());
                     preferences.commit();
                     Toast.makeText(LoginActivity.this,"Sign In Complete : UID : " + user.getUid(),Toast.LENGTH_LONG).show();
+
                     //Mask: Start Main activity and finish this activity
                     startActivity(new Intent(LoginActivity.this,BenefitActivity.class));
                     finish();
@@ -150,8 +153,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Log.d("debug","OnAuthFailure : " + e.getLocalizedMessage());
-                Toast.makeText(LoginActivity.this,e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                AlertDialog.ShowErrorDialog(LoginActivity.this,"Login Error",e.getLocalizedMessage());
             }
         });
     }

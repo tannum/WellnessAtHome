@@ -141,11 +141,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         tel.setText("1111111111");
         email.setText("user2@hotmail.com");
         password.setText("123456");
-
-
     }
-
-
 
     @Override
     public void onClick(View v) {
@@ -162,7 +158,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         }
         else if(id == R.id.btnProfileRegisterDone){
             RegisterProfileHandler();
-            //finish();
 
         }
         else if(id == R.id.btnProfileRegisterCancel){
@@ -214,12 +209,17 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             Log.d("debug","upload profile picture success");
                            pDialog.dismiss();
-                           AlertDialog.ShowSuccessDialog(SignUpActivity.this, new AlertDialog.OnDialogConfirmListener() {
+                           AlertDialog.ShowSuccessDialog(SignUpActivity.this,
+                                   "Congratulation","Your registration success",
+                                   new AlertDialog.OnDialogConfirmListener() {
                                @Override
                                public void onDialogConfirm() {
                                    //Mask: Save User ID and go to main activity
                                    preferences.putString("user_id",user.getUid());
                                    preferences.commit();
+
+                                   //Mask: finish this activity and start MainActivity
+                                   finish();
                                    startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
                                }
                            });
@@ -231,12 +231,19 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                        public void onFailure(@NonNull Exception e) {
                            Log.d("debug","upload profile picture error");
                            pDialog.dismiss();
-                           AlertDialog.ShowWaringDialog(SignUpActivity.this, new AlertDialog.OnDialogConfirmListener() {
+                           AlertDialog.ShowWaringDialog(SignUpActivity.this,
+                                   "Information",
+                                   "Some registration not complete",
+                                   e.getLocalizedMessage(),
+                                   new AlertDialog.OnDialogConfirmListener() {
                                @Override
                                public void onDialogConfirm() {
                                    //Mask: Save User ID and go to main activity
                                    preferences.putString("user_id",user.getUid());
                                    preferences.commit();
+
+                                   //Mask: finish this activity and start MainActivity
+                                   finish();
                                    startActivity(new Intent(SignUpActivity.this,BenefitActivity.class));
                                }
                            });
@@ -258,7 +265,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onFailure(@NonNull Exception e) {
                 Log.d("debug","Register Auth Error1" + e.getLocalizedMessage());
                 pDialog.dismiss();
-                AlertDialog.ShowErrorDialog(SignUpActivity.this);
+                AlertDialog.ShowErrorDialog(SignUpActivity.this,"Registration Error",e.getLocalizedMessage());
             }
         });
     }
