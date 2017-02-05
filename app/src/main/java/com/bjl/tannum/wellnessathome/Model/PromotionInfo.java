@@ -1,19 +1,39 @@
 package com.bjl.tannum.wellnessathome.Model;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by tannum on 1/19/2017 AD.
  */
 
+@IgnoreExtraProperties
 public class PromotionInfo {
 
-    int thumbnailId;
-    String header;
-    String content;
+    public int thumbnailId;
+    public String header;
+    public String content;
+    public String imageUrl;
 
     public PromotionInfo( int thumbnailId,String header,String content) {
         this.content = content;
         this.header = header;
         this.thumbnailId = thumbnailId;
+    }
+
+    public PromotionInfo(String header,String content,  String imageUrl) {
+        this.content = content;
+        this.header = header;
+        this.imageUrl = imageUrl;
+    }
+
+
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getContent() {

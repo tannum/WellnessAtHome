@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bjl.tannum.wellnessathome.Model.BenefitInfo;
-import com.bjl.tannum.wellnessathome.Model.promotionItemInfo;
 import com.bjl.tannum.wellnessathome.R;
 
 import org.w3c.dom.Text;

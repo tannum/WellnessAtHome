@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bjl.tannum.wellnessathome.Model.PromotionInfo;
-import com.bjl.tannum.wellnessathome.Model.promotionItemInfo;
 import com.bjl.tannum.wellnessathome.R;
 
 import java.util.Collections;
