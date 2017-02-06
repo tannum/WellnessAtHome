@@ -6,7 +6,7 @@ import com.google.firebase.database.IgnoreExtraProperties;
  * Created by tannum on 1/19/2017 AD.
  */
 
-@IgnoreExtraProperties
+
 public class PromotionInfo {
 
     public int thumbnailId;
@@ -14,7 +14,10 @@ public class PromotionInfo {
     public String content;
     public String imageUrl;
 
-    public PromotionInfo( int thumbnailId,String header,String content) {
+    public PromotionInfo() {
+    }
+
+    public PromotionInfo(int thumbnailId, String header, String content) {
         this.content = content;
         this.header = header;
         this.thumbnailId = thumbnailId;
