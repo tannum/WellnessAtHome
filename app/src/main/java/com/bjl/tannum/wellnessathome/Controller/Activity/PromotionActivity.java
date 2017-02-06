@@ -17,8 +17,11 @@ import com.bjl.tannum.wellnessathome.Model.PromotionInfo;
 import com.bjl.tannum.wellnessathome.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionButton;
 import com.squareup.picasso.Picasso;
 
@@ -40,14 +43,12 @@ public class PromotionActivity extends AppCompatActivity implements PromotionAda
         setContentView(R.layout.activity_promotion);
 
 
-        //Mask: Initial Firebase database
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("promotion_blog");
+
 
         //Mask: Initial recycler view
         recyclerView = (RecyclerView)findViewById(R.id.listPromotion);
-        //recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("promotion_blog");
 
 
 //        //Mask: Initial recycler view
@@ -76,6 +77,23 @@ public class PromotionActivity extends AppCompatActivity implements PromotionAda
 
 
 
+//        //Mask: Initial Firebase database
+//        recyclerView = (RecyclerView)findViewById(R.id.listPromotion);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mDatabase = FirebaseDatabase.getInstance().getReference().child("promotion_blog");
+//        ValueEventListener postListener = new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Log.d("debug", dataSnapshot.getValue().toString());
+//                PromotionInfo info = dataSnapshot.getValue(PromotionInfo.class);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//
+//            }
+//        };
+//        mDatabase.addValueEventListener(postListener);
 
 
 
@@ -93,12 +111,6 @@ public class PromotionActivity extends AppCompatActivity implements PromotionAda
                 startActivity(new Intent(PromotionActivity.this,PromotionPostActivity.class));
             }
         });
-
-
-
-
-
-
 
 
     }
